@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wish_i_sent/core/asset/app_vector.dart';
 
@@ -63,7 +64,7 @@ class _SigninorsignupState extends State<Signinorsignup>
                     children: [
                       Center(
                         child: SvgPicture.asset(
-                          height: 300,
+                          height: 200,
                           AppVector.free,
                         ),
                       ),
@@ -90,40 +91,50 @@ class _SigninorsignupState extends State<Signinorsignup>
                       const SizedBox(height: 40),
                       Column(
                         children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 25),
-                            width: 200,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 149, 221, 255),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Login',
-                                style: GoogleFonts.cabin(
-                                    fontSize: 25,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                          GestureDetector(
+                            onTap: () {
+                              context.push('/login');
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 25),
+                              width: 200,
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 149, 221, 255),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Login',
+                                  style: GoogleFonts.cabin(
+                                      fontSize: 25,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                           ),
                           const SizedBox(height: 20),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 25),
-                            width: 200,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 204, 250, 205),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Sign up',
-                                style: GoogleFonts.cabin(
-                                    fontSize: 25,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
+                          GestureDetector(
+                            onTap: () {
+                              context.push('/signup');
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 25),
+                              width: 200,
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 204, 250, 205),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Sign up',
+                                  style: GoogleFonts.cabin(
+                                      fontSize: 25,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                           ),

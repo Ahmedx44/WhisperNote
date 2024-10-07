@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1003859525256",
+    "project_id": "unspoken-words-11150",
+    "storage_bucket": "unspoken-words-11150.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003859525256:android:1639e17f4a9327c2f2293d",
+        "android_client_info": {
+          "package_name": "com.example.wish_i_sen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdKm7HhCwVUYKzyXlBVCYpN0l7tsuW8rA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
