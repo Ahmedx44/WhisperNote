@@ -48,7 +48,8 @@ class _SignupScreenState extends State<SignupScreen> {
       ),
       body: Container(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.02),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -81,7 +82,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 20),
                   ),
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.black),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 // Email TextField
@@ -101,7 +102,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 20),
                   ),
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.black),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 // Password TextField
@@ -142,6 +143,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                 InkWell(
                   onTap: () async {
+                    FocusScope.of(context).unfocus();
                     showDialog(
                       context: context,
                       builder: (context) =>
@@ -157,27 +159,27 @@ class _SignupScreenState extends State<SignupScreen> {
 
                     result.fold(
                       (ifLeft) {
+                        FocusScope.of(context).unfocus();
                         Navigator.pop(context);
                         ToastifyFlutter.error(
                           context,
                           message: ifLeft.toString(),
                           duration: 5,
-                          position: ToastPosition.bottom,
+                          position: ToastPosition.top,
                           style: ToastStyle.simple,
-                          onClose: true,
                         );
                       },
                       (ifRight) {
+                        FocusScope.of(context).unfocus();
                         Navigator.pop(context);
-                        ToastifyFlutter.success(
+                        ToastifyFlutter.error(
                           context,
                           message: ifRight.toString(),
                           duration: 5,
-                          position: ToastPosition.bottom,
-                          style: ToastStyle.simple,
-                          onClose: true,
+                          position: ToastPosition.top,
+                          style: ToastStyle.flat,
                         );
-                        context.go('/login');
+                        context.push('/login');
                       },
                     );
                   },

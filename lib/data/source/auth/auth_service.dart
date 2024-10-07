@@ -23,6 +23,8 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
         message = 'Wrong password';
       } else if (e.code == 'user-not-found') {
         message = 'User with tha email not found';
+      } else {
+        message = 'Something went wrong';
       }
       return Left(message);
     }
