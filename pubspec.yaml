@@ -44,6 +44,8 @@ dependencies:
   custom_signin_buttons: ^1.0.2
   firebase_core: ^3.6.0
   firebase_auth: ^5.3.1
+  dartz: ^0.10.1
+  cloud_firestore: ^5.4.4
  
 
  
