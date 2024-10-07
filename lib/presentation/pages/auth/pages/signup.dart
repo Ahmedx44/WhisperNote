@@ -1,10 +1,15 @@
 import 'package:custom_signin_buttons/custom_signin_buttons.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:toastify_flutter/toastify_flutter.dart';
+import 'package:wish_i_sent/data/model/auth/signup_model.dart';
+import 'package:wish_i_sent/domain/usecase/auth/signup_usecase.dart';
 import 'package:wish_i_sent/presentation/pages/auth/widget/custom_app_bar.dart';
+import 'package:wish_i_sent/service_provider.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -15,6 +20,23 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   bool obsecure = true;
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
+
+  showDialogg(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return Center(
+          child: CircularProgressIndicator(
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +65,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                 //Username TextField
                 TextField(
+                  controller: _usernameController,
                   obscureText: false,
                   decoration: InputDecoration(
                     hintText: 'username',
@@ -63,6 +86,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 // Email TextField
                 TextField(
+                  controller: _emailController,
                   decoration: InputDecoration(
                     hintText: 'Email',
                     hintStyle:
@@ -82,6 +106,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 // Password TextField
                 TextField(
+                  controller: _passwordController,
                   obscureText: obsecure,
                   decoration: InputDecoration(
                     suffix: GestureDetector(
@@ -93,7 +118,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       child: Icon(
                         obsecure
                             ? CupertinoIcons.eye_slash_fill
-                            : CupertinoIcons.eye_slash_fill,
+                            : CupertinoIcons.eye_fill,
                       ),
                     ),
                     hintText: 'Password',
@@ -115,40 +140,82 @@ class _SignupScreenState extends State<SignupScreen> {
                 const SizedBox(height: 20),
                 // Login Button
 
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.lightBlue,
-                    borderRadius: BorderRadius.circular(30),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Signup',
-                        style: GoogleFonts.cabin(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                InkWell(
+                  onTap: () async {
+                    showDialog(
+                      context: context,
+                      builder: (context) =>
+                          Center(child: CircularProgressIndicator()),
+                    );
+
+                    final result = await sl<SignUpUsecase>().call(SignupModel(
+                      username: _usernameController.text,
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                      confirmPassword: _confirmPasswordController.text,
+                    ));
+
+                    result.fold(
+                      (ifLeft) {
+                        Navigator.pop(context);
+                        ToastifyFlutter.error(
+                          context,
+                          message: ifLeft.toString(),
+                          duration: 5,
+                          position: ToastPosition.bottom,
+                          style: ToastStyle.simple,
+                          onClose: true,
+                        );
+                      },
+                      (ifRight) {
+                        Navigator.pop(context);
+                        ToastifyFlutter.success(
+                          context,
+                          message: ifRight.toString(),
+                          duration: 5,
+                          position: ToastPosition.bottom,
+                          style: ToastStyle.simple,
+                          onClose: true,
+                        );
+                        context.go('/login');
+                      },
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.lightBlue,
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: const Offset(0, 3),
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      const Icon(
-                        Icons.login,
-                        color: Colors.white,
-                        size: 24,
-                      ),
-                    ],
+                      ],
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 15),
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Signup',
+                          style: GoogleFonts.cabin(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        const Icon(
+                          Icons.login,
+                          color: Colors.white,
+                          size: 24,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
 
