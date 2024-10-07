@@ -1,21 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:wish_i_sent/domain/entity/auth/signin_entity.dart';
+import 'package:wish_i_sent/data/model/auth/signin_model.dart';
 import 'package:wish_i_sent/domain/entity/auth/signup_entity.dart';
 
-abstract class AuthService {
-  Future<Either<String, String>> signin(UserSignInEntity userSignInEntity);
+abstract class AuthFirebaseService {
+  Future<Either<String, String>> signin(SigninModel signinModel);
   Future<Either<String, String>> signup(UserSignupEntity userSignupEntity);
 }
 
-class AuthSericeImpl extends AuthService {
+class AuthFirebaseServiceImpl extends AuthFirebaseService {
   @override
-  Future<Either<String, String>> signin(
-      UserSignInEntity userSignInEntity) async {
+  Future<Either<String, String>> signin(SigninModel signinModel) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: userSignInEntity.email, password: userSignInEntity.password);
+          email: signinModel.email, password: signinModel.password);
       return const Right('User Succefully Loged in');
     } on FirebaseAuthException catch (e) {
       String message = '';
