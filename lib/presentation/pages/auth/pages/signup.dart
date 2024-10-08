@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:toastify_flutter/toastify_flutter.dart';
 import 'package:wish_i_sent/data/model/auth/signup_model.dart';
 import 'package:wish_i_sent/domain/usecase/auth/signup_usecase.dart';
-import 'package:wish_i_sent/presentation/pages/auth/widget/custom_app_bar.dart';
+import 'package:wish_i_sent/presentation/widget/custom_app_bar.dart';
 import 'package:wish_i_sent/service_provider.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -138,6 +138,40 @@ class _SignupScreenState extends State<SignupScreen> {
                   style:
                       const TextStyle(color: Color.fromARGB(137, 43, 42, 42)),
                 ),
+
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                TextField(
+                  controller: _confirmPasswordController,
+                  obscureText: obsecure,
+                  decoration: InputDecoration(
+                    suffix: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          obsecure = !obsecure;
+                        });
+                      },
+                      child: Icon(
+                        obsecure
+                            ? CupertinoIcons.eye_slash_fill
+                            : CupertinoIcons.eye_fill,
+                      ),
+                    ),
+                    hintText: 'Confirm Password',
+                    hintStyle:
+                        const TextStyle(color: Color.fromARGB(137, 43, 42, 42)),
+                    filled: true,
+                    fillColor:
+                        Color.fromARGB(255, 133, 133, 133).withOpacity(0.2),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide.none,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 20),
+                  ),
+                  style:
+                      const TextStyle(color: Color.fromARGB(137, 43, 42, 42)),
+                ),
                 const SizedBox(height: 20),
                 // Login Button
 
@@ -147,8 +181,26 @@ class _SignupScreenState extends State<SignupScreen> {
                     showDialog(
                       context: context,
                       builder: (context) =>
-                          Center(child: CircularProgressIndicator()),
+                          const Center(child: CircularProgressIndicator()),
                     );
+
+                    if (_passwordController.text !=
+                        _confirmPasswordController.text) {
+                      Navigator.pop(context);
+                      showToast(
+                        'Passwords don\'t match',
+                        backgroundColor: Colors.red,
+                        context: context,
+                        animation: StyledToastAnimation.scale,
+                        reverseAnimation: StyledToastAnimation.slideFromTop,
+                        position: StyledToastPosition.top,
+                        animDuration: Duration(seconds: 2),
+                        duration: Duration(seconds: 4),
+                        curve: Curves.elasticOut,
+                        reverseCurve: Curves.linear,
+                      );
+                      return;
+                    }
 
                     final result = await sl<SignUpUsecase>().call(SignupModel(
                       username: _usernameController.text,
@@ -161,23 +213,31 @@ class _SignupScreenState extends State<SignupScreen> {
                       (ifLeft) {
                         FocusScope.of(context).unfocus();
                         Navigator.pop(context);
-                        ToastifyFlutter.error(
-                          context,
-                          message: ifLeft.toString(),
-                          duration: 5,
-                          position: ToastPosition.top,
-                          style: ToastStyle.simple,
+                        showToast(
+                          ifLeft,
+                          context: context,
+                          animation: StyledToastAnimation.scale,
+                          reverseAnimation: StyledToastAnimation.fade,
+                          position: StyledToastPosition.top,
+                          animDuration: Duration(seconds: 1),
+                          duration: Duration(seconds: 4),
+                          curve: Curves.elasticOut,
+                          reverseCurve: Curves.linear,
                         );
                       },
                       (ifRight) {
                         FocusScope.of(context).unfocus();
                         Navigator.pop(context);
-                        ToastifyFlutter.error(
-                          context,
-                          message: ifRight.toString(),
-                          duration: 5,
-                          position: ToastPosition.top,
-                          style: ToastStyle.flat,
+                        showToast(
+                          ifRight,
+                          context: context,
+                          animation: StyledToastAnimation.scale,
+                          reverseAnimation: StyledToastAnimation.fade,
+                          position: StyledToastPosition.top,
+                          animDuration: Duration(seconds: 1),
+                          duration: Duration(seconds: 4),
+                          curve: Curves.elasticOut,
+                          reverseCurve: Curves.linear,
                         );
                         context.push('/login');
                       },

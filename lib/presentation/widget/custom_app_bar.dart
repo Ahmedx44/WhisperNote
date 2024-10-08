@@ -19,6 +19,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20),
       child: AppBar(
+        forceMaterialTransparency: true,
         backgroundColor: backgroundColor,
         elevation: 0,
         leading: showBackButton!

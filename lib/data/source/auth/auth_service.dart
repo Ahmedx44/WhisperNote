@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wish_i_sent/data/model/auth/signin_model.dart';
 import 'package:wish_i_sent/data/model/auth/signup_model.dart';
-import 'package:wish_i_sent/domain/entity/auth/signup_entity.dart';
 
 abstract class AuthFirebaseService {
   Future<Either<String, String>> signin(SigninModel signinModel);
