@@ -1,7 +1,6 @@
 import 'package:custom_signin_buttons/custom_signin_buttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,8 +19,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool obsecure = true;
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
         showBackButton: true,
       ),
       body: SafeArea(
+        // ignore: avoid_unnecessary_containers
         child: Container(
-          decoration: BoxDecoration(),
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: SingleChildScrollView(
@@ -60,10 +59,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: InputDecoration(
                       hintText: 'Email',
                       hintStyle: GoogleFonts.caveat(
-                          color: Color.fromARGB(137, 43, 42, 42)),
+                          color: const Color.fromARGB(137, 43, 42, 42)),
                       filled: true,
-                      fillColor:
-                          Color.fromARGB(255, 133, 133, 133).withOpacity(0.2),
+                      fillColor: const Color.fromARGB(255, 133, 133, 133)
+                          .withOpacity(0.2),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
@@ -95,8 +94,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       hintStyle: const TextStyle(
                           color: Color.fromARGB(137, 43, 42, 42)),
                       filled: true,
-                      fillColor:
-                          Color.fromARGB(255, 133, 133, 133).withOpacity(0.2),
+                      fillColor: const Color.fromARGB(255, 133, 133, 133)
+                          .withOpacity(0.2),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
@@ -115,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       showDialog(
                         context: context,
                         builder: (context) =>
-                            Center(child: CircularProgressIndicator()),
+                            const Center(child: CircularProgressIndicator()),
                       );
 
                       final result = await sl<SigninUsecase>().call(SigninModel(
@@ -135,8 +134,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               animation: StyledToastAnimation.slideFromTop,
                               reverseAnimation: StyledToastAnimation.fade,
                               position: StyledToastPosition.top,
-                              animDuration: Duration(seconds: 1),
-                              duration: Duration(seconds: 4),
+                              animDuration: const Duration(seconds: 1),
+                              duration: const Duration(seconds: 4),
                               curve: Curves.elasticOut,
                               reverseCurve: Curves.linear,
                             );
@@ -154,8 +153,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               animation: StyledToastAnimation.slideFromTop,
                               reverseAnimation: StyledToastAnimation.fade,
                               position: StyledToastPosition.top,
-                              animDuration: Duration(seconds: 1),
-                              duration: Duration(seconds: 4),
+                              animDuration: const Duration(seconds: 1),
+                              duration: const Duration(seconds: 4),
                               curve: Curves.elasticOut,
                               reverseCurve: Curves.linear,
                             );
@@ -191,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           const SizedBox(width: 10),
-                          Icon(
+                          const Icon(
                             Icons.login,
                             color: Colors.white,
                             size: 24,
@@ -208,7 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       const Expanded(child: Divider()),
                       Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
                           'or',
                           style:

@@ -16,11 +16,11 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    Widget page = Homepage();
+    Widget page = const Homepage();
     if (pageIndex == 0) {
-      page = Homepage();
+      page = const Homepage();
     } else if (pageIndex == 2) {
-      page = ProfileScreen();
+      page = const ProfileScreen();
     }
 
     return Scaffold(

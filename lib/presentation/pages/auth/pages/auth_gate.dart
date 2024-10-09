@@ -42,12 +42,12 @@ class _AuthGateState extends State<AuthGate> {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (firstOpen) {
-          return OnboardingScreenn();
+          return const OnboardingScreenn();
         } else {
           if (snapshot.hasData) {
-            return Home();
+            return const Home();
           } else {
-            return Signinorsignup();
+            return const Signinorsignup();
           }
         }
       },

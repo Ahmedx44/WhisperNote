@@ -44,7 +44,7 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
         'username': signupModel.username,
       });
 
-      return Right('User Account Successfully Created!');
+      return const Right('User Account Successfully Created!');
     } on FirebaseAuthException catch (e) {
       String message = '';
       // Handle Firebase authentication errors

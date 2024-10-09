@@ -17,7 +17,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       child: AppBar(
         forceMaterialTransparency: true,
         backgroundColor: backgroundColor,
@@ -44,9 +44,9 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         title: title!.isNotEmpty
             ? Text(
                 title!,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               )
-            : Text(''),
+            : const Text(''),
       ),
     );
   }

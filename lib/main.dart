@@ -25,6 +25,7 @@ void main() async {
   runApp(MyApp());
 }
 
+// ignore: use_key_in_widget_constructors
 class MyApp extends StatelessWidget {
   final GoRouter _goRouter = GoRouter(routes: [
     GoRoute(
@@ -49,11 +50,11 @@ class MyApp extends StatelessWidget {
     ),
     GoRoute(
       path: '/login',
-      builder: (context, state) => LoginScreen(),
+      builder: (context, state) => const LoginScreen(),
     ),
     GoRoute(
       path: '/signup',
-      builder: (context, state) => SignupScreen(),
+      builder: (context, state) => const SignupScreen(),
     )
   ]);
 
