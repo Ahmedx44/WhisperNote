@@ -1,9 +1,17 @@
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fk_toggle/fk_toggle.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wish_i_sent/data/model/post/post_model.dart';
+import 'package:wish_i_sent/data/source/post/post_service.dart';
+import 'package:wish_i_sent/domain/usecase/post/post_usecase.dart';
 import 'package:wish_i_sent/presentation/widget/custom_app_bar.dart';
+import 'package:wish_i_sent/service_provider.dart';
 
 class AddPost extends StatefulWidget {
   const AddPost({super.key});
@@ -13,8 +21,13 @@ class AddPost extends StatefulWidget {
 }
 
 class _AddPostState extends State<AddPost> {
-  late Color screenPickerColor;
+  Color screenPickerColor = Colors.black;
   String categoryName = 'Lover';
+  final userId = FirebaseAuth.instance.currentUser!.uid.toString();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _messageController = TextEditingController();
+  TextEditingController _keyController = TextEditingController();
+  TextEditingController _typeController = TextEditingController();
 
   @override
   void initState() {
@@ -130,7 +143,7 @@ class _AddPostState extends State<AddPost> {
                     height: MediaQuery.of(context).size.height / 40,
                   ),
                   FkToggle(
-                      backgroundColor: Colors.white,
+                      backgroundColor: const Color.fromARGB(255, 54, 54, 54),
                       width: 80,
                       onSelected: (idx, instance) {
                         setState(() {
@@ -138,8 +151,31 @@ class _AddPostState extends State<AddPost> {
                         });
                       },
                       height: 50,
+                      disabledElementColor: Colors.white,
                       selectedColor: Colors.blue,
                       labels: const ['Lover', 'Parent', 'Relative', 'Friend']),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 40,
+                  ),
+                  Text(
+                    'Add Key(optinal)',
+                    style: GoogleFonts.caveat(
+                        fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  const TextField(
+                    style: TextStyle(color: Colors.white, fontSize: 22),
+                    decoration: InputDecoration(
+                        fillColor: Color.fromARGB(255, 54, 54, 54),
+                        hintText: 'key',
+                        hintStyle: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                        filled: true,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide.none)),
+                  ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 40,
                   ),
@@ -163,8 +199,11 @@ class _AddPostState extends State<AddPost> {
                         elevation: 2,
                         child: ColorPicker(
                           color: screenPickerColor,
-                          onColorChanged: (Color color) =>
-                              setState(() => screenPickerColor = color),
+                          onColorChanged: (Color color) => setState(
+                            () {
+                              screenPickerColor = color;
+                            },
+                          ),
                           width: 44,
                           height: 44,
                           borderRadius: 22,
@@ -188,20 +227,52 @@ class _AddPostState extends State<AddPost> {
                     height: MediaQuery.of(context).size.height / 30,
                   ),
                   Center(
-                    child: Container(
-                      width: 200,
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Colors.lightBlue,
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Post',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 22),
+                    child: GestureDetector(
+                      onTap: () async {
+                       
+                         final result= await sl<PostUsecase>().call(PostModel(
+                              userId: userId,
+                              color: screenPickerColor.toString(),
+                              name: _nameController.text,
+                              category: categoryName,
+                              message: _messageController.text,
+                              type: _typeController.text,
+                              key: _keyController.text,
+                              messages: []));
+
+                              result.fold((ifLeft){
+ Future.delayed(const Duration(milliseconds: 100), () {
+                            showToast(
+                              ifLeft,
+                              backgroundColor: Colors.green,
+                              context: context,
+                              animation: StyledToastAnimation.slideFromTop,
+                              reverseAnimation: StyledToastAnimation.fade,
+                              position: StyledToastPosition.top,
+                              animDuration: const Duration(seconds: 1),
+                              duration: const Duration(seconds: 4),
+                              curve: Curves.elasticOut,
+                              reverseCurve: Curves.linear,
+                            );
+                              }, (ifRight){});
+                              );
+                      
+                      },
+                      child: Container(
+                        width: 200,
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.lightBlue,
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Post',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: 22),
+                          ),
                         ),
                       ),
                     ),
