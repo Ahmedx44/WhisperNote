@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wish_i_sent/presentation/pages/Profile/profile.dart';
 import 'package:wish_i_sent/presentation/pages/home/homepage.dart';
+import 'package:wish_i_sent/presentation/pages/post/add_post.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -40,13 +41,10 @@ class _HomeState extends State<Home> {
         onTap: (int index) {
           if (index == 1) {
             showModalBottomSheet(
+              isScrollControlled: true,
               context: context,
               builder: (context) {
-                return Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(16.0),
-                    child: Container());
+                return AddPost();
               },
             );
           } else {
