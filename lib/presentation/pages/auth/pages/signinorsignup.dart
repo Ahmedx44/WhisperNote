@@ -106,7 +106,7 @@ class _SigninorsignupState extends State<Signinorsignup>
                               child: Center(
                                 child: Text(
                                   'Login',
-                                  style: GoogleFonts.cabin(
+                                  style: GoogleFonts.caveat(
                                       fontSize: 25,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
@@ -130,7 +130,7 @@ class _SigninorsignupState extends State<Signinorsignup>
                               child: Center(
                                 child: Text(
                                   'Sign up',
-                                  style: GoogleFonts.cabin(
+                                  style: GoogleFonts.caveat(
                                       fontSize: 25,
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold),

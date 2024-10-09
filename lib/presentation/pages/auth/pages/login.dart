@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: _emailController,
                     decoration: InputDecoration(
                       hintText: 'Email',
-                      hintStyle: const TextStyle(
+                      hintStyle: GoogleFonts.caveat(
                           color: Color.fromARGB(137, 43, 42, 42)),
                       filled: true,
                       fillColor:
@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 15, horizontal: 20),
                     ),
-                    style: const TextStyle(color: Colors.black),
+                    style: GoogleFonts.caveat(color: Colors.black),
                   ),
                   const SizedBox(height: 20),
                   // Password TextField
@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 15, horizontal: 20),
                     ),
-                    style: const TextStyle(color: Colors.black),
+                    style: GoogleFonts.caveat(color: Colors.black),
                   ),
                   const SizedBox(height: 20),
                   // Login Button
@@ -131,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ifLeft,
                               backgroundColor: Colors.red,
                               context: context,
-                              animation: StyledToastAnimation.scale,
+                              animation: StyledToastAnimation.slideFromTop,
                               reverseAnimation: StyledToastAnimation.fade,
                               position: StyledToastPosition.top,
                               animDuration: Duration(seconds: 1),
@@ -143,13 +143,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         (ifRight) {
                           FocusScope.of(context).unfocus();
+                          context.go('/home');
                           Navigator.pop(context);
                           Future.delayed(const Duration(milliseconds: 100), () {
                             showToast(
                               ifRight,
                               backgroundColor: Colors.green,
                               context: context,
-                              animation: StyledToastAnimation.scale,
+                              animation: StyledToastAnimation.slideFromTop,
                               reverseAnimation: StyledToastAnimation.fade,
                               position: StyledToastPosition.top,
                               animDuration: Duration(seconds: 1),
@@ -158,7 +159,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               reverseCurve: Curves.linear,
                             );
                           });
-                          context.push('/login');
                         },
                       );
                     },
@@ -183,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           Text(
                             'Login',
-                            style: GoogleFonts.cabin(
+                            style: GoogleFonts.caveat(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -203,17 +203,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 20),
                   // Signup Prompt
 
-                  const Row(
+                  Row(
                     children: [
-                      Expanded(child: Divider()),
+                      const Expanded(child: Divider()),
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           'or',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style:
+                              GoogleFonts.caveat(fontWeight: FontWeight.bold),
                         ),
                       ),
-                      Expanded(child: Divider())
+                      const Expanded(child: Divider())
                     ],
                   ),
                   SizedBox(
@@ -244,18 +245,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         'Don\'t have an account? ',
-                        style: TextStyle(color: Colors.black),
+                        style: GoogleFonts.caveat(
+                            color: Colors.black, fontSize: 22),
                       ),
                       GestureDetector(
                         onTap: () {
                           context.go('/signup');
                         },
-                        child: const Text(
+                        child: Text(
                           'Sign Up',
-                          style: TextStyle(
+                          style: GoogleFonts.caveat(
                             color: Colors.black,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

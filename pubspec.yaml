@@ -48,6 +48,8 @@ dependencies:
   cloud_firestore: ^5.4.4
   device_preview: ^1.2.0
   flutter_styled_toast: ^2.2.1
+  shared_preferences: ^2.3.2
+  awesome_bottom_bar: ^1.2.4
  
 
  

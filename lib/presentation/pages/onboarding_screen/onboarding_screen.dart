@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:onboarding_intro_screen/onboarding_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wish_i_sent/core/asset/app_vector.dart';
 
 class OnboardingScreenn extends StatefulWidget {
@@ -12,9 +13,18 @@ class OnboardingScreenn extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreenn> {
+  late SharedPreferences prefs;
   @override
   void initState() {
     super.initState();
+    checkOpen();
+  }
+
+  void checkOpen() async {
+    prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool('first-open') == null) {
+      await prefs.setBool('first-open', true);
+    }
   }
 
   @override

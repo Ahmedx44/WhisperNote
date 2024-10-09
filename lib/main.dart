@@ -1,10 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wish_i_sent/firebase_options.dart';
+import 'package:wish_i_sent/presentation/pages/auth/pages/auth_gate.dart';
 import 'package:wish_i_sent/presentation/pages/auth/pages/login.dart';
 import 'package:wish_i_sent/presentation/pages/auth/pages/signinorsignup.dart';
 import 'package:wish_i_sent/presentation/pages/auth/pages/signup.dart';
+import 'package:wish_i_sent/presentation/pages/home/home.dart';
 import 'package:wish_i_sent/presentation/pages/onboarding_screen/onboarding_screen.dart';
 import 'package:wish_i_sent/presentation/pages/splash_Screen/splash_screen.dart';
 import 'package:wish_i_sent/service_provider.dart';
@@ -13,6 +16,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initializedDependency();
+
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
   // runApp(
   //   DevicePreview(
   //     enabled: !kReleaseMode,
@@ -27,6 +32,14 @@ class MyApp extends StatelessWidget {
     GoRoute(
       path: '/',
       builder: (context, state) => const SplashScreen(),
+    ),
+    GoRoute(
+      path: '/authGate',
+      builder: (context, state) => const AuthGate(),
+    ),
+    GoRoute(
+      path: '/home',
+      builder: (context, state) => const Home(),
     ),
     GoRoute(
       path: '/onboarding',

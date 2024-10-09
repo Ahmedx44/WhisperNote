@@ -1,8 +1,6 @@
 import 'package:custom_signin_buttons/custom_signin_buttons.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,10 +18,11 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   bool obsecure = true;
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   showDialogg(BuildContext context) {
     return showDialog(
@@ -46,6 +45,7 @@ class _SignupScreenState extends State<SignupScreen> {
         backgroundColor: Colors.white,
         showBackButton: true,
       ),
+      // ignore: avoid_unnecessary_containers
       body: Container(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -70,11 +70,11 @@ class _SignupScreenState extends State<SignupScreen> {
                   obscureText: false,
                   decoration: InputDecoration(
                     hintText: 'username',
-                    hintStyle:
-                        const TextStyle(color: Color.fromARGB(137, 43, 42, 42)),
+                    hintStyle: GoogleFonts.caveat(
+                        color: const Color.fromARGB(137, 43, 42, 42)),
                     filled: true,
-                    fillColor:
-                        Color.fromARGB(255, 133, 133, 133).withOpacity(0.2),
+                    fillColor: const Color.fromARGB(255, 133, 133, 133)
+                        .withOpacity(0.2),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide.none,
@@ -82,7 +82,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 20),
                   ),
-                  style: const TextStyle(color: Colors.black),
+                  style: GoogleFonts.caveat(
+                      color: const Color.fromARGB(137, 43, 42, 42)),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 // Email TextField
@@ -90,11 +91,11 @@ class _SignupScreenState extends State<SignupScreen> {
                   controller: _emailController,
                   decoration: InputDecoration(
                     hintText: 'Email',
-                    hintStyle:
-                        const TextStyle(color: Color.fromARGB(137, 43, 42, 42)),
+                    hintStyle: GoogleFonts.caveat(
+                        color: const Color.fromARGB(137, 43, 42, 42)),
                     filled: true,
-                    fillColor:
-                        Color.fromARGB(255, 133, 133, 133).withOpacity(0.2),
+                    fillColor: const Color.fromARGB(255, 133, 133, 133)
+                        .withOpacity(0.2),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide.none,
@@ -102,7 +103,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 20),
                   ),
-                  style: const TextStyle(color: Colors.black),
+                  style: GoogleFonts.caveat(
+                      color: const Color.fromARGB(137, 43, 42, 42)),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 // Password TextField
@@ -123,11 +125,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                     hintText: 'Password',
-                    hintStyle:
-                        const TextStyle(color: Color.fromARGB(137, 43, 42, 42)),
+                    hintStyle: GoogleFonts.caveat(
+                        color: const Color.fromARGB(137, 43, 42, 42)),
                     filled: true,
-                    fillColor:
-                        Color.fromARGB(255, 133, 133, 133).withOpacity(0.2),
+                    fillColor: const Color.fromARGB(255, 133, 133, 133)
+                        .withOpacity(0.2),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide.none,
@@ -135,8 +137,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 20),
                   ),
-                  style:
-                      const TextStyle(color: Color.fromARGB(137, 43, 42, 42)),
+                  style: GoogleFonts.caveat(
+                      color: const Color.fromARGB(137, 43, 42, 42)),
                 ),
 
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
@@ -157,11 +159,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                     hintText: 'Confirm Password',
-                    hintStyle:
-                        const TextStyle(color: Color.fromARGB(137, 43, 42, 42)),
+                    hintStyle: GoogleFonts.caveat(
+                        color: const Color.fromARGB(137, 43, 42, 42)),
                     filled: true,
-                    fillColor:
-                        Color.fromARGB(255, 133, 133, 133).withOpacity(0.2),
+                    fillColor: const Color.fromARGB(255, 133, 133, 133)
+                        .withOpacity(0.2),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide.none,
@@ -169,8 +171,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 20),
                   ),
-                  style:
-                      const TextStyle(color: Color.fromARGB(137, 43, 42, 42)),
+                  style: GoogleFonts.caveat(
+                      color: const Color.fromARGB(137, 43, 42, 42)),
                 ),
                 const SizedBox(height: 20),
                 // Login Button
@@ -191,11 +193,11 @@ class _SignupScreenState extends State<SignupScreen> {
                         'Passwords don\'t match',
                         backgroundColor: Colors.red,
                         context: context,
-                        animation: StyledToastAnimation.scale,
+                        animation: StyledToastAnimation.slideFromTop,
                         reverseAnimation: StyledToastAnimation.slideFromTop,
                         position: StyledToastPosition.top,
-                        animDuration: Duration(seconds: 2),
-                        duration: Duration(seconds: 4),
+                        animDuration: const Duration(seconds: 2),
+                        duration: const Duration(seconds: 4),
                         curve: Curves.elasticOut,
                         reverseCurve: Curves.linear,
                       );
@@ -216,11 +218,11 @@ class _SignupScreenState extends State<SignupScreen> {
                         showToast(
                           ifLeft,
                           context: context,
-                          animation: StyledToastAnimation.scale,
+                          animation: StyledToastAnimation.slideFromTop,
                           reverseAnimation: StyledToastAnimation.fade,
                           position: StyledToastPosition.top,
-                          animDuration: Duration(seconds: 1),
-                          duration: Duration(seconds: 4),
+                          animDuration: const Duration(seconds: 1),
+                          duration: const Duration(seconds: 4),
                           curve: Curves.elasticOut,
                           reverseCurve: Curves.linear,
                         );
@@ -231,11 +233,11 @@ class _SignupScreenState extends State<SignupScreen> {
                         showToast(
                           ifRight,
                           context: context,
-                          animation: StyledToastAnimation.scale,
+                          animation: StyledToastAnimation.slideFromTop,
                           reverseAnimation: StyledToastAnimation.fade,
                           position: StyledToastPosition.top,
-                          animDuration: Duration(seconds: 1),
-                          duration: Duration(seconds: 4),
+                          animDuration: const Duration(seconds: 1),
+                          duration: const Duration(seconds: 4),
                           curve: Curves.elasticOut,
                           reverseCurve: Curves.linear,
                         );
@@ -264,7 +266,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       children: [
                         Text(
                           'Signup',
-                          style: GoogleFonts.cabin(
+                          style: GoogleFonts.caveat(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -284,17 +286,17 @@ class _SignupScreenState extends State<SignupScreen> {
                 const SizedBox(height: 20),
                 // Signup Prompt
 
-                const Row(
+                Row(
                   children: [
-                    Expanded(child: Divider()),
+                    const Expanded(child: Divider()),
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'or',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: GoogleFonts.caveat(fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Expanded(child: Divider())
+                    const Expanded(child: Divider())
                   ],
                 ),
                 SizedBox(
@@ -325,17 +327,17 @@ class _SignupScreenState extends State<SignupScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'ALready have Account? ',
-                      style: TextStyle(color: Colors.black),
+                    Text(
+                      'Already have Account? ',
+                      style: GoogleFonts.caveat(color: Colors.black),
                     ),
                     GestureDetector(
                       onTap: () {
-                        context.go('/loginn');
+                        context.pushReplacement('/login');
                       },
-                      child: const Text(
+                      child: Text(
                         'Sign In',
-                        style: TextStyle(
+                        style: GoogleFonts.caveat(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
