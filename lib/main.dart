@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wish_i_sent/firebase_options.dart';
 import 'package:wish_i_sent/presentation/pages/auth/pages/auth_gate.dart';
 import 'package:wish_i_sent/presentation/pages/auth/pages/login.dart';
@@ -17,7 +16,6 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initializedDependency();
 
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
   // runApp(
   //   DevicePreview(
   //     enabled: !kReleaseMode,
