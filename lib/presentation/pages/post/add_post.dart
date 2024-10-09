@@ -1,5 +1,3 @@
-import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fk_toggle/fk_toggle.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
@@ -8,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wish_i_sent/data/model/post/post_model.dart';
-import 'package:wish_i_sent/data/source/post/post_service.dart';
 import 'package:wish_i_sent/domain/usecase/post/post_usecase.dart';
 import 'package:wish_i_sent/presentation/widget/custom_app_bar.dart';
 import 'package:wish_i_sent/service_provider.dart';
@@ -87,6 +84,7 @@ class _AddPostState extends State<AddPost> {
                             ),
                             Expanded(
                               child: TextField(
+                                controller: _nameController,
                                 style: const TextStyle(
                                     color: Colors.white, fontSize: 22),
                                 decoration: InputDecoration(
@@ -112,6 +110,7 @@ class _AddPostState extends State<AddPost> {
                           height: MediaQuery.of(context).size.height / 30,
                         ),
                         TextField(
+                          controller: _messageController,
                           maxLines: 8,
                           style: const TextStyle(
                               color: Colors.white, fontSize: 24),
@@ -162,9 +161,10 @@ class _AddPostState extends State<AddPost> {
                     style: GoogleFonts.caveat(
                         fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  const TextField(
-                    style: TextStyle(color: Colors.white, fontSize: 22),
-                    decoration: InputDecoration(
+                  TextField(
+                    controller: _keyController,
+                    style: const TextStyle(color: Colors.white, fontSize: 22),
+                    decoration: const InputDecoration(
                         fillColor: Color.fromARGB(255, 54, 54, 54),
                         hintText: 'key',
                         hintStyle: TextStyle(
@@ -229,22 +229,40 @@ class _AddPostState extends State<AddPost> {
                   Center(
                     child: GestureDetector(
                       onTap: () async {
-                       
-                         final result= await sl<PostUsecase>().call(PostModel(
-                              userId: userId,
-                              color: screenPickerColor.toString(),
-                              name: _nameController.text,
-                              category: categoryName,
-                              message: _messageController.text,
-                              type: _typeController.text,
-                              key: _keyController.text,
-                              messages: []));
+                        final result = await sl<PostUsecase>().call(PostModel(
+                          userId: userId,
+                          color: screenPickerColor.toString(),
+                          name: _nameController.text,
+                          category: categoryName,
+                          message: _messageController.text,
+                          type: _typeController.text,
+                          key: _keyController.text,
+                          messages: [],
+                        ));
 
-                              result.fold((ifLeft){
- Future.delayed(const Duration(milliseconds: 100), () {
+                        result.fold(
+                          (ifLeft) {
+                            Future.delayed(const Duration(milliseconds: 100),
+                                () {
+                              showToast(
+                                ifLeft,
+                                backgroundColor: Colors.green,
+                                context: context,
+                                animation: StyledToastAnimation.slideFromTop,
+                                reverseAnimation: StyledToastAnimation.fade,
+                                position: StyledToastPosition.top,
+                                animDuration: const Duration(seconds: 1),
+                                duration: const Duration(seconds: 4),
+                                curve: Curves.elasticOut,
+                                reverseCurve: Curves.linear,
+                              );
+                            });
+                          },
+                          (ifRight) {
+                            // You can handle the success case here, for example, navigate to a different screen or show a success message.
                             showToast(
-                              ifLeft,
-                              backgroundColor: Colors.green,
+                              "Post added successfully!",
+                              backgroundColor: Colors.blue,
                               context: context,
                               animation: StyledToastAnimation.slideFromTop,
                               reverseAnimation: StyledToastAnimation.fade,
@@ -254,9 +272,8 @@ class _AddPostState extends State<AddPost> {
                               curve: Curves.elasticOut,
                               reverseCurve: Curves.linear,
                             );
-                              }, (ifRight){});
-                              );
-                      
+                          },
+                        );
                       },
                       child: Container(
                         width: 200,
