@@ -5,6 +5,7 @@ import 'package:wish_i_sent/data/model/post/post_model.dart';
 
 abstract class PostService {
   Future<Either<String, String>> postmessage(PostModel postModel);
+  Future<Either<String, QuerySnapshot<Map<String, dynamic>>>> getAllPost();
 }
 
 class PostServiceImpl extends PostService {
@@ -30,6 +31,17 @@ class PostServiceImpl extends PostService {
       return const Right('Your post Succesffully made');
     } catch (e) {
       return const Left('Something went wrong,Please try again');
+    }
+  }
+
+  @override
+  Future<Either<String, QuerySnapshot<Map<String, dynamic>>>>
+      getAllPost() async {
+    try {
+      final result = await firebasefirestore.collection('messages').get();
+      return Right(result);
+    } catch (e) {
+      return const Left('Something went wrong');
     }
   }
 }

@@ -229,6 +229,11 @@ class _AddPostState extends State<AddPost> {
                   Center(
                     child: GestureDetector(
                       onTap: () async {
+                        showDialog(
+                          context: context,
+                          builder: (context) =>
+                              const Center(child: CircularProgressIndicator()),
+                        );
                         final result = await sl<PostUsecase>().call(PostModel(
                           userId: userId,
                           color: screenPickerColor.toString(),
@@ -242,11 +247,12 @@ class _AddPostState extends State<AddPost> {
 
                         result.fold(
                           (ifLeft) {
+                            Navigator.pop(context);
                             Future.delayed(const Duration(milliseconds: 100),
                                 () {
                               showToast(
                                 ifLeft,
-                                backgroundColor: Colors.green,
+                                backgroundColor: Colors.red,
                                 context: context,
                                 animation: StyledToastAnimation.slideFromTop,
                                 reverseAnimation: StyledToastAnimation.fade,
@@ -259,10 +265,10 @@ class _AddPostState extends State<AddPost> {
                             });
                           },
                           (ifRight) {
-                            // You can handle the success case here, for example, navigate to a different screen or show a success message.
+                            Navigator.pop(context);
                             showToast(
-                              "Post added successfully!",
-                              backgroundColor: Colors.blue,
+                              ifRight,
+                              backgroundColor: Colors.green,
                               context: context,
                               animation: StyledToastAnimation.slideFromTop,
                               reverseAnimation: StyledToastAnimation.fade,

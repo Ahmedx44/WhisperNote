@@ -52,6 +52,8 @@ dependencies:
   awesome_bottom_bar: ^1.2.4
   fk_toggle: ^0.1.4
   flex_color_picker: ^3.6.0
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
  
 
  

@@ -2,8 +2,8 @@ import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wish_i_sent/presentation/pages/Profile/profile.dart';
-import 'package:wish_i_sent/presentation/pages/home/homepage.dart';
-import 'package:wish_i_sent/presentation/pages/post/add_post.dart';
+import 'package:wish_i_sent/presentation/pages/home/pages/homepage.dart';
+import 'package:wish_i_sent/presentation/pages/post/page/add_post.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

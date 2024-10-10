@@ -6,7 +6,7 @@ import 'package:wish_i_sent/presentation/pages/auth/pages/auth_gate.dart';
 import 'package:wish_i_sent/presentation/pages/auth/pages/login.dart';
 import 'package:wish_i_sent/presentation/pages/auth/pages/signinorsignup.dart';
 import 'package:wish_i_sent/presentation/pages/auth/pages/signup.dart';
-import 'package:wish_i_sent/presentation/pages/home/home.dart';
+import 'package:wish_i_sent/presentation/pages/home/pages/home.dart';
 import 'package:wish_i_sent/presentation/pages/onboarding_screen/onboarding_screen.dart';
 import 'package:wish_i_sent/presentation/pages/splash_Screen/splash_screen.dart';
 import 'package:wish_i_sent/service_provider.dart';

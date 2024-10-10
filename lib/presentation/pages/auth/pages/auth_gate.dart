@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wish_i_sent/presentation/pages/auth/pages/signinorsignup.dart';
-import 'package:wish_i_sent/presentation/pages/home/home.dart';
+import 'package:wish_i_sent/presentation/pages/home/pages/home.dart';
 import 'package:wish_i_sent/presentation/pages/onboarding_screen/onboarding_screen.dart';
 
 class AuthGate extends StatefulWidget {
