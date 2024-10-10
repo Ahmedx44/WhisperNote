@@ -13,23 +13,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int pageIndex = 0;
+  int pageIndex = 0; // Track the selected page
+  bool showAddPostModal = false; // Control modal visibility
 
   @override
   Widget build(BuildContext context) {
-    Widget page = const Homepage();
-    if (pageIndex == 0) {
-      page = const Homepage();
-    } else if (pageIndex == 2) {
-      page = const ProfileScreen();
-    }
+    // Define the pages for the IndexedStack
+    const List<Widget> pages = [
+      Homepage(),
+      SizedBox(), // Placeholder for the modal button
+      ProfileScreen(),
+    ];
 
     return Scaffold(
       bottomNavigationBar: BottomBarCreative(
         items: const [
           TabItem(icon: CupertinoIcons.home, title: 'Home'),
           TabItem(icon: CupertinoIcons.add),
-          TabItem(icon: CupertinoIcons.person, title: 'Profile')
+          TabItem(icon: CupertinoIcons.person, title: 'Profile'),
         ],
         backgroundColor: Colors.white,
         color: Colors.black,
@@ -40,21 +41,35 @@ class _HomeState extends State<Home> {
         ),
         onTap: (int index) {
           if (index == 1) {
+            // Show the modal bottom sheet when the middle button is tapped
             showModalBottomSheet(
+              enableDrag: true,
               isScrollControlled: true,
+              isDismissible: true,
+              showDragHandle: true,
               context: context,
               builder: (context) {
-                return AddPost();
+                return const AddPost(); // Your AddPost modal
               },
-            );
+            ).whenComplete(() {
+              // Reset the page index to 0 after the modal is closed
+              setState(() {
+                pageIndex = 0; // Go back to the home page
+              });
+            });
           } else {
+            // Update the page index for the other buttons
             setState(() {
-              pageIndex = index;
+              pageIndex = index; // Switch to the selected page
             });
           }
         },
       ),
-      body: page,
+      // Use IndexedStack to preserve the state of the pages
+      body: IndexedStack(
+        index: pageIndex,
+        children: pages,
+      ),
     );
   }
 }
