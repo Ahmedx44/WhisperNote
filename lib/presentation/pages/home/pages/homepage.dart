@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_flip_builder/page_flip_builder.dart';
 import 'package:wish_i_sent/domain/usecase/post/get_post_usecase.dart';
 import 'package:wish_i_sent/presentation/pages/home/bloc/post_bloc/post_cubit.dart';
 import 'package:wish_i_sent/presentation/pages/home/bloc/post_bloc/post_state.dart';
@@ -15,6 +16,16 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  // A map to store user-entered keys for each post
+  final Map<int, String> enteredKeys = {};
+  // A map to track whether the key for each post is correct (flip allowed)
+  final Map<int, bool> canFlip = {};
+
+  Color parseColor(String colorString) {
+    final hexColor = colorString.replaceAll("Color(", "").replaceAll(")", "");
+    return Color(int.parse(hexColor));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -44,13 +55,18 @@ class _HomepageState extends State<Homepage> {
                     ),
                     child: Column(
                       children: [
-                        const TextField(
-                          decoration: InputDecoration(
-                            labelText: 'search name',
-                            focusColor: Colors.lightBlue,
-                            hoverColor: Colors.lightBlue,
-                            suffixIcon: Icon(CupertinoIcons.search),
-                            border: OutlineInputBorder(),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Search name',
+                              focusColor: Colors.lightBlue,
+                              hoverColor: Colors.lightBlue,
+                              suffixIcon: Icon(CupertinoIcons.search),
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15))),
+                            ),
                           ),
                         ),
                         Expanded(
@@ -59,15 +75,154 @@ class _HomepageState extends State<Homepage> {
                             itemBuilder: (context, index) {
                               final postData = querySnapshot.docs[index].data();
 
-                              // Check if 'key' exists and if it's empty or not
+                              // Ensure 'key' is present in postData
                               if (postData['key'] != null &&
                                   postData['key'] is String &&
                                   postData['key']!.isNotEmpty) {
-                                // If key is not empty, show something else
+                                // Retrieve the entered key and flip status for this post
+                                final enteredKey = enteredKeys[index] ?? '';
+                                final isFlipAllowed = canFlip[index] ?? false;
+
+                                return Container(
+                                  color: Colors.black,
+                                  child: isFlipAllowed
+                                      ? PageFlipBuilder(
+                                          frontBuilder: (_) => Container(
+                                            padding: const EdgeInsets.all(16.0),
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black
+                                                      .withOpacity(0.1),
+                                                  blurRadius: 5,
+                                                  spreadRadius: 2,
+                                                ),
+                                              ],
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                'Flip to see the message!',
+                                                style: GoogleFonts.caveat(
+                                                    fontSize: 24),
+                                              ),
+                                            ),
+                                          ),
+                                          backBuilder: (_) => Container(
+                                            padding: const EdgeInsets.all(16.0),
+                                            decoration: BoxDecoration(
+                                              color: Colors.purple,
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'To: ${postData['name']}',
+                                                  style: GoogleFonts.caveat(
+                                                    fontSize: 30,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 10),
+                                                Text(
+                                                  'Category: ${postData['category']}',
+                                                  style: GoogleFonts.caveat(
+                                                    fontSize: 24,
+                                                    color: Colors.white70,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 20),
+                                                Text(
+                                                  postData['message'],
+                                                  style: GoogleFonts.caveat(
+                                                    fontSize: 24,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          flipAxis: Axis.horizontal,
+                                          maxTilt: 0.003,
+                                          maxScale: 0.2,
+                                        )
+                                      : Container(
+                                          padding: const EdgeInsets.all(16.0),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black
+                                                    .withOpacity(0.1),
+                                                blurRadius: 5,
+                                                spreadRadius: 2,
+                                              ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                'Enter the secret key to unlock the message:',
+                                                style: GoogleFonts.caveat(
+                                                    fontSize: 24),
+                                              ),
+                                              const SizedBox(height: 16),
+                                              TextField(
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    enteredKeys[index] = value;
+                                                  });
+                                                },
+                                                decoration: InputDecoration(
+                                                  labelText: 'Enter Key',
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 16),
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  // Check if entered key matches the post key
+                                                  if (enteredKey ==
+                                                      postData['key']) {
+                                                    setState(() {
+                                                      canFlip[index] = true;
+                                                    });
+                                                  } else {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                          'Incorrect key! Try again.'),
+                                                    ));
+                                                  }
+                                                },
+                                                child: const Text('Unlock'),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                );
+                              } else {
+                                // If key is missing, show the normal message
                                 return Container(
                                   decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
                                       border: Border.all(width: 1)),
-                                  margin: const EdgeInsets.all(20),
+                                  margin: const EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 10),
                                   padding: const EdgeInsets.all(5),
                                   child: Column(
                                     children: [
@@ -100,8 +255,12 @@ class _HomepageState extends State<Homepage> {
                                                     0.05,
                                                 padding:
                                                     const EdgeInsets.all(5),
-                                                decoration: const BoxDecoration(
-                                                    color: Colors.black),
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                    color: parseColor(
+                                                        postData['color'])),
                                               ),
                                               Positioned(
                                                 left: 10,
@@ -115,35 +274,17 @@ class _HomepageState extends State<Homepage> {
                                             ]),
                                           )
                                         ],
+                                      ),
+                                      Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 10),
+                                        height: 200,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            color:
+                                                parseColor(postData['color'])),
                                       )
-                                    ],
-                                  ),
-                                );
-                              } else {
-                                // If key is empty or doesn't exist
-                                return Container(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          const Icon(
-                                              CupertinoIcons.text_aligncenter),
-                                          const SizedBox(width: 8),
-                                          Text(
-                                              'To ${postData['category'] ?? 'Unknown'}'),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 8),
-                                      const Text(
-                                        'Message: No Key Provided',
-                                        style: TextStyle(
-                                          color: Colors.red,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
                                     ],
                                   ),
                                 );
