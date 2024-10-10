@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
 import 'package:wish_i_sent/domain/usecase/post/get_post_usecase.dart';
@@ -84,10 +85,18 @@ class _HomepageState extends State<Homepage> {
                                 final isFlipAllowed = canFlip[index] ?? false;
 
                                 return Container(
-                                  color: Colors.black,
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 10),
+                                  decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius: BorderRadius.circular(15)),
                                   child: isFlipAllowed
                                       ? PageFlipBuilder(
                                           frontBuilder: (_) => Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.25,
                                             padding: const EdgeInsets.all(16.0),
                                             decoration: BoxDecoration(
                                               color: Colors.white,
@@ -102,15 +111,68 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                               ],
                                             ),
-                                            child: Center(
-                                              child: Text(
-                                                'Flip to see the message!',
-                                                style: GoogleFonts.caveat(
-                                                    fontSize: 24),
-                                              ),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    const Icon(CupertinoIcons
+                                                        .text_aligncenter),
+                                                    Text(
+                                                      'To ${postData['category']}',
+                                                      style: GoogleFonts.caveat(
+                                                          fontSize: 25),
+                                                    ),
+                                                    SizedBox(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.05,
+                                                    ),
+                                                    Expanded(
+                                                        child: Stack(children: [
+                                                      Container(
+                                                        width: double.infinity,
+                                                        height: 50,
+                                                        decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                            color: parseColor(
+                                                                postData[
+                                                                    'color'])),
+                                                      ),
+                                                      Positioned(
+                                                        top: 5,
+                                                        left: 10,
+                                                        child: Text(
+                                                          postData['name'],
+                                                          style: GoogleFonts
+                                                              .caveat(
+                                                                  fontSize: 26,
+                                                                  color: Colors
+                                                                      .white),
+                                                        ),
+                                                      )
+                                                    ]))
+                                                  ],
+                                                ),
+                                                Center(
+                                                  child: Text(
+                                                    'Flip to see the message!',
+                                                    style: GoogleFonts.caveat(
+                                                        fontSize: 24),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                           backBuilder: (_) => Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.25,
                                             padding: const EdgeInsets.all(16.0),
                                             decoration: BoxDecoration(
                                               color: Colors.purple,
@@ -157,19 +219,55 @@ class _HomepageState extends State<Homepage> {
                                             color: Colors.white,
                                             borderRadius:
                                                 BorderRadius.circular(15),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black
-                                                    .withOpacity(0.1),
-                                                blurRadius: 5,
-                                                spreadRadius: 2,
-                                              ),
-                                            ],
                                           ),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
+                                              Row(
+                                                children: [
+                                                  const Icon(CupertinoIcons
+                                                      .text_aligncenter),
+                                                  Text(
+                                                    'To ${postData['category']}',
+                                                    style: GoogleFonts.caveat(
+                                                        fontSize: 25),
+                                                  ),
+                                                  SizedBox(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.05,
+                                                  ),
+                                                  Expanded(
+                                                      child: Stack(children: [
+                                                    Container(
+                                                      width: double.infinity,
+                                                      height: 50,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          color: parseColor(
+                                                              postData[
+                                                                  'color'])),
+                                                    ),
+                                                    Positioned(
+                                                      top: 5,
+                                                      left: 10,
+                                                      child: Text(
+                                                        postData['name'],
+                                                        style:
+                                                            GoogleFonts.caveat(
+                                                                fontSize: 26,
+                                                                color: Colors
+                                                                    .white),
+                                                      ),
+                                                    )
+                                                  ]))
+                                                ],
+                                              ),
                                               Text(
                                                 'Enter the secret key to unlock the message:',
                                                 style: GoogleFonts.caveat(
@@ -192,8 +290,8 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                               ),
                                               const SizedBox(height: 16),
-                                              ElevatedButton(
-                                                onPressed: () {
+                                              GestureDetector(
+                                                onTap: () {
                                                   // Check if entered key matches the post key
                                                   if (enteredKey ==
                                                       postData['key']) {
@@ -201,15 +299,50 @@ class _HomepageState extends State<Homepage> {
                                                       canFlip[index] = true;
                                                     });
                                                   } else {
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(SnackBar(
-                                                      content: Text(
-                                                          'Incorrect key! Try again.'),
-                                                    ));
+                                                    showToast(
+                                                      'Incorrect key entered',
+                                                      backgroundColor:
+                                                          Colors.red,
+                                                      context: context,
+                                                      animation:
+                                                          StyledToastAnimation
+                                                              .slideFromTop,
+                                                      reverseAnimation:
+                                                          StyledToastAnimation
+                                                              .fade,
+                                                      position:
+                                                          StyledToastPosition
+                                                              .top,
+                                                      animDuration:
+                                                          const Duration(
+                                                              seconds: 1),
+                                                      duration: const Duration(
+                                                          seconds: 4),
+                                                      curve: Curves.elasticOut,
+                                                      reverseCurve:
+                                                          Curves.linear,
+                                                    );
                                                   }
                                                 },
-                                                child: const Text('Unlock'),
+                                                child: Container(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      vertical: 10,
+                                                      horizontal: 20),
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.lightBlue,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20)),
+                                                  child: Text(
+                                                    'Unlock',
+                                                    style: GoogleFonts.caveat(
+                                                        fontSize: 17,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -231,12 +364,7 @@ class _HomepageState extends State<Homepage> {
                                           const Icon(
                                               CupertinoIcons.text_aligncenter),
                                           Text(
-                                            'To ',
-                                            style: GoogleFonts.caveat(
-                                                fontSize: 25),
-                                          ),
-                                          Text(
-                                            postData['category'],
+                                            'To ${postData['category']}',
                                             style: GoogleFonts.caveat(
                                                 fontSize: 25),
                                           ),
@@ -279,11 +407,22 @@ class _HomepageState extends State<Homepage> {
                                         margin: const EdgeInsets.symmetric(
                                             vertical: 10),
                                         height: 200,
+                                        width: double.infinity,
                                         decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            color:
-                                                parseColor(postData['color'])),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: parseColor(postData['color']),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            postData['message'],
+                                            style: GoogleFonts.caveat(
+                                                fontSize: 24,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
                                       )
                                     ],
                                   ),
