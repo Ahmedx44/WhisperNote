@@ -25,15 +25,18 @@ class _HomeState extends State<Home> {
     }
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       bottomNavigationBar: BottomBarCreative(
+        blur: 0.4,
+        backgroundSelected: Theme.of(context).colorScheme.primary,
         items: const [
           TabItem(icon: CupertinoIcons.home, title: 'Home'),
           TabItem(icon: CupertinoIcons.add),
           TabItem(icon: CupertinoIcons.person, title: 'Profile')
         ],
-        backgroundColor: Colors.white,
-        color: Colors.black,
-        colorSelected: Colors.lightBlue,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        color: Colors.white,
+        colorSelected: Theme.of(context).colorScheme.primary,
         indexSelected: pageIndex,
         highlightStyle: const HighlightStyle(
           isHexagon: true,

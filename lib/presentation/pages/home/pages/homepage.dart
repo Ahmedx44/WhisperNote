@@ -17,9 +17,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  // A map to store user-entered keys for each post
   final Map<int, String> enteredKeys = {};
-  // A map to track whether the key for each post is correct (flip allowed)
   final Map<int, bool> canFlip = {};
 
   Color parseColor(String colorString) {
@@ -50,21 +48,25 @@ class _HomepageState extends State<Homepage> {
 
                 return SafeArea(
                   child: Container(
+                    color: Theme.of(context).colorScheme.surface,
+                    height: double.infinity,
                     margin: EdgeInsets.symmetric(
-                      vertical: MediaQuery.of(context).size.height * 0.02,
+                      vertical: MediaQuery.of(context).size.height * 0,
                       horizontal: MediaQuery.of(context).size.width * 0.02,
                     ),
                     child: Column(
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 5),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 20),
                           child: TextField(
                             decoration: InputDecoration(
+                              filled: true,
+                              fillColor:
+                                  Theme.of(context).colorScheme.secondary,
                               labelText: 'Search name',
-                              focusColor: Colors.lightBlue,
-                              hoverColor: Colors.lightBlue,
-                              suffixIcon: Icon(CupertinoIcons.search),
-                              border: OutlineInputBorder(
+                              suffixIcon: const Icon(CupertinoIcons.search),
+                              border: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(15))),
                             ),
@@ -85,7 +87,7 @@ class _HomepageState extends State<Homepage> {
                                 final isFlipAllowed = canFlip[index] ?? false;
 
                                 return Container(
-                                  margin: EdgeInsets.symmetric(
+                                  margin: const EdgeInsets.symmetric(
                                       vertical: 10, horizontal: 10),
                                   decoration: BoxDecoration(
                                       color: Colors.black,
@@ -99,7 +101,9 @@ class _HomepageState extends State<Homepage> {
                                                 0.25,
                                             padding: const EdgeInsets.all(16.0),
                                             decoration: BoxDecoration(
-                                              color: Colors.white,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
                                               borderRadius:
                                                   BorderRadius.circular(15),
                                               boxShadow: [
@@ -175,7 +179,8 @@ class _HomepageState extends State<Homepage> {
                                                 0.25,
                                             padding: const EdgeInsets.all(16.0),
                                             decoration: BoxDecoration(
-                                              color: Colors.purple,
+                                              color:
+                                                  parseColor(postData['color']),
                                               borderRadius:
                                                   BorderRadius.circular(15),
                                             ),
@@ -184,7 +189,7 @@ class _HomepageState extends State<Homepage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'To: ${postData['name']}',
+                                                  'To: ${postData['category']}',
                                                   style: GoogleFonts.caveat(
                                                     fontSize: 30,
                                                     color: Colors.white,
@@ -216,7 +221,9 @@ class _HomepageState extends State<Homepage> {
                                       : Container(
                                           padding: const EdgeInsets.all(16.0),
                                           decoration: BoxDecoration(
-                                            color: Colors.white,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
                                             borderRadius:
                                                 BorderRadius.circular(15),
                                           ),
@@ -330,7 +337,9 @@ class _HomepageState extends State<Homepage> {
                                                       vertical: 10,
                                                       horizontal: 20),
                                                   decoration: BoxDecoration(
-                                                      color: Colors.lightBlue,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .primary,
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               20)),
@@ -352,6 +361,9 @@ class _HomepageState extends State<Homepage> {
                                 // If key is missing, show the normal message
                                 return Container(
                                   decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
                                       borderRadius: BorderRadius.circular(20),
                                       border: Border.all(width: 1)),
                                   margin: const EdgeInsets.symmetric(

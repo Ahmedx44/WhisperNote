@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: const MyAppBar(
         backgroundColor: Colors.white,
         showBackButton: true,
@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: GoogleFonts.pacifico(
                       fontSize: 36,
                       fontWeight: FontWeight.bold,
-                      color: Colors.lightBlue,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -58,8 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: _emailController,
                     decoration: InputDecoration(
                       hintText: 'Email',
-                      hintStyle: GoogleFonts.caveat(
-                          color: const Color.fromARGB(137, 43, 42, 42)),
+                      hintStyle: GoogleFonts.caveat(color: Colors.white),
                       filled: true,
                       fillColor: const Color.fromARGB(255, 133, 133, 133)
                           .withOpacity(0.2),
@@ -70,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 15, horizontal: 20),
                     ),
-                    style: GoogleFonts.caveat(color: Colors.black),
+                    style: GoogleFonts.caveat(color: Colors.white),
                   ),
                   const SizedBox(height: 20),
                   // Password TextField
@@ -91,8 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       hintText: 'Password',
-                      hintStyle: const TextStyle(
-                          color: Color.fromARGB(137, 43, 42, 42)),
+                      hintStyle: const TextStyle(color: Colors.white),
                       filled: true,
                       fillColor: const Color.fromARGB(255, 133, 133, 133)
                           .withOpacity(0.2),
@@ -103,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 15, horizontal: 20),
                     ),
-                    style: GoogleFonts.caveat(color: Colors.black),
+                    style: GoogleFonts.caveat(color: Colors.white),
                   ),
                   const SizedBox(height: 20),
                   // Login Button
@@ -164,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.lightBlue,
+                        color: Theme.of(context).colorScheme.primary,
                         borderRadius: BorderRadius.circular(30),
                         boxShadow: [
                           BoxShadow(
@@ -248,7 +246,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         'Don\'t have an account? ',
                         style: GoogleFonts.caveat(
-                            color: Colors.black, fontSize: 22),
+                            color: Colors.white, fontSize: 22),
                       ),
                       GestureDetector(
                         onTap: () {
@@ -257,7 +255,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           'Sign Up',
                           style: GoogleFonts.caveat(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),

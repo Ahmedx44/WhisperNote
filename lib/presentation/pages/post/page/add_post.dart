@@ -156,7 +156,7 @@ class _AddPostState extends State<AddPost> {
                       },
                       height: 50,
                       disabledElementColor: Colors.white,
-                      selectedColor: Colors.blue,
+                      selectedColor: Theme.of(context).colorScheme.primary,
                       labels: const ['Lover', 'Parent', 'Relative', 'Friend']),
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 40,
@@ -234,6 +234,24 @@ class _AddPostState extends State<AddPost> {
                   Center(
                     child: GestureDetector(
                       onTap: () async {
+                        if (_nameController.text.isEmpty ||
+                            _messageController.text.isEmpty) {
+                          return Future.delayed(
+                              const Duration(milliseconds: 100), () {
+                            showToast(
+                              'please fill the persons name and message ',
+                              backgroundColor: Colors.red,
+                              context: context,
+                              animation: StyledToastAnimation.slideFromTop,
+                              reverseAnimation: StyledToastAnimation.fade,
+                              position: StyledToastPosition.top,
+                              animDuration: const Duration(seconds: 1),
+                              duration: const Duration(seconds: 4),
+                              curve: Curves.elasticOut,
+                              reverseCurve: Curves.linear,
+                            );
+                          });
+                        }
                         showDialog(
                           context: context,
                           builder: (context) =>
@@ -289,9 +307,9 @@ class _AddPostState extends State<AddPost> {
                       child: Container(
                         width: 200,
                         padding: const EdgeInsets.symmetric(vertical: 10),
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: Colors.lightBlue,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                         child: const Center(
                           child: Text(

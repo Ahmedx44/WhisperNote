@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wish_i_sent/core/theme/apptheme.dart';
 import 'package:wish_i_sent/firebase_options.dart';
 import 'package:wish_i_sent/presentation/pages/auth/pages/auth_gate.dart';
 import 'package:wish_i_sent/presentation/pages/auth/pages/login.dart';
@@ -61,6 +62,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      theme: theme,
       routerConfig: _goRouter,
       debugShowCheckedModeBanner: false,
     );

@@ -40,9 +40,9 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: const MyAppBar(
-        backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      appBar: MyAppBar(
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         showBackButton: true,
       ),
       // ignore: avoid_unnecessary_containers
@@ -59,7 +59,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   style: GoogleFonts.pacifico(
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
-                    color: Colors.lightBlue,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
 
@@ -71,7 +71,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   decoration: InputDecoration(
                     hintText: 'username',
                     hintStyle: GoogleFonts.caveat(
-                        color: const Color.fromARGB(137, 43, 42, 42)),
+                      color: Colors.white,
+                    ),
                     filled: true,
                     fillColor: const Color.fromARGB(255, 133, 133, 133)
                         .withOpacity(0.2),
@@ -82,8 +83,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 20),
                   ),
-                  style: GoogleFonts.caveat(
-                      color: const Color.fromARGB(137, 43, 42, 42)),
+                  style: GoogleFonts.caveat(color: Colors.white),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 // Email TextField
@@ -92,10 +92,10 @@ class _SignupScreenState extends State<SignupScreen> {
                   decoration: InputDecoration(
                     hintText: 'Email',
                     hintStyle: GoogleFonts.caveat(
-                        color: const Color.fromARGB(137, 43, 42, 42)),
+                      color: Colors.white,
+                    ),
                     filled: true,
-                    fillColor: const Color.fromARGB(255, 133, 133, 133)
-                        .withOpacity(0.2),
+                    fillColor: Theme.of(context).colorScheme.secondary,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide.none,
@@ -103,8 +103,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 20),
                   ),
-                  style: GoogleFonts.caveat(
-                      color: const Color.fromARGB(137, 43, 42, 42)),
+                  style: GoogleFonts.caveat(color: Colors.white),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 // Password TextField
@@ -126,7 +125,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     hintText: 'Password',
                     hintStyle: GoogleFonts.caveat(
-                        color: const Color.fromARGB(137, 43, 42, 42)),
+                      color: Colors.white,
+                    ),
                     filled: true,
                     fillColor: const Color.fromARGB(255, 133, 133, 133)
                         .withOpacity(0.2),
@@ -137,8 +137,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 20),
                   ),
-                  style: GoogleFonts.caveat(
-                      color: const Color.fromARGB(137, 43, 42, 42)),
+                  style: GoogleFonts.caveat(color: Colors.white),
                 ),
 
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
@@ -160,7 +159,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     hintText: 'Confirm Password',
                     hintStyle: GoogleFonts.caveat(
-                        color: const Color.fromARGB(137, 43, 42, 42)),
+                      color: Colors.white,
+                    ),
                     filled: true,
                     fillColor: const Color.fromARGB(255, 133, 133, 133)
                         .withOpacity(0.2),
@@ -171,8 +171,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 20),
                   ),
-                  style: GoogleFonts.caveat(
-                      color: const Color.fromARGB(137, 43, 42, 42)),
+                  style: GoogleFonts.caveat(color: Colors.white),
                 ),
                 const SizedBox(height: 20),
                 // Login Button
@@ -247,7 +246,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.lightBlue,
+                      color: Theme.of(context).colorScheme.primary,
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
@@ -329,7 +328,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   children: [
                     Text(
                       'Already have Account? ',
-                      style: GoogleFonts.caveat(color: Colors.black),
+                      style: GoogleFonts.caveat(color: Colors.white),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -338,7 +337,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       child: Text(
                         'Sign In',
                         style: GoogleFonts.caveat(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

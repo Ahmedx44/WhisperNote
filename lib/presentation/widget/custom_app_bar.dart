@@ -29,9 +29,8 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.grey.shade200,
-                  ),
+                      borderRadius: BorderRadius.circular(20),
+                      color: Theme.of(context).colorScheme.secondary),
                   padding: const EdgeInsets.all(10),
                   child: const Icon(
                     CupertinoIcons.back,

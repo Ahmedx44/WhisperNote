@@ -47,7 +47,7 @@ class _SigninorsignupState extends State<Signinorsignup>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
         // Use a Stack to allow content positioning
         child: Stack(
@@ -63,9 +63,12 @@ class _SigninorsignupState extends State<Signinorsignup>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Center(
-                        child: SvgPicture.asset(
-                          height: 200,
-                          AppVector.free,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(200),
+                          child: SvgPicture.asset(
+                            height: 200,
+                            AppVector.free,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 20),
