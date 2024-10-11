@@ -7,4 +7,5 @@ abstract class AuthRepository {
   Future<Either<String, String>> signin(SigninModel signinModel);
   Future<Either<String, String>> signup(SignupModel signupModel);
   Future<Either<String, DocumentSnapshot<Map<String, dynamic>>>> getUser();
+  Future<Either<String, String>> signinWithApple();
 }

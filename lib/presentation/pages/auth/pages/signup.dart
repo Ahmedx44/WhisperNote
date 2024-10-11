@@ -5,6 +5,7 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wish_i_sent/data/model/auth/signup_model.dart';
+import 'package:wish_i_sent/domain/usecase/auth/signin_with_google.dart';
 import 'package:wish_i_sent/domain/usecase/auth/signup_usecase.dart';
 import 'package:wish_i_sent/presentation/widget/custom_app_bar.dart';
 import 'package:wish_i_sent/service_provider.dart';
@@ -307,6 +308,35 @@ class _SignupScreenState extends State<SignupScreen> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SignInButton(
+                        onPressed: () async {
+                          showDialog(
+                            context: context,
+                            builder: (context) => const Center(
+                                child: CircularProgressIndicator()),
+                          );
+
+                          final result =
+                              await sl<SigninWithGoogleUseCase>().call();
+                          result.fold((ifLeft) {
+                            Future.delayed(const Duration(milliseconds: 100),
+                                () {
+                              showToast(
+                                ifLeft,
+                                backgroundColor: Colors.red,
+                                context: context,
+                                animation: StyledToastAnimation.slideFromTop,
+                                reverseAnimation: StyledToastAnimation.fade,
+                                position: StyledToastPosition.top,
+                                animDuration: const Duration(seconds: 1),
+                                duration: const Duration(seconds: 4),
+                                curve: Curves.elasticOut,
+                                reverseCurve: Curves.linear,
+                              );
+                            });
+                          }, (ifRight) {
+                            context.go('/home');
+                          });
+                        },
                         button: Button.Google,
                       ),
                     ),

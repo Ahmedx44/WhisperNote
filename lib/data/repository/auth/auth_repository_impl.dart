@@ -22,4 +22,9 @@ class AuthRepositoryImpl extends AuthRepository {
       getUser() async {
     return await sl<AuthFirebaseService>().getUser();
   }
+  
+  @override
+  Future<Either<String, String>> signinWithApple()async{
+    return await sl<AuthFirebaseService>().signinWithGoogle();
+  }
 }

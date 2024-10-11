@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:wish_i_sent/data/model/post/post_model.dart';
 
 abstract class PostService {
@@ -11,6 +12,7 @@ abstract class PostService {
 class PostServiceImpl extends PostService {
   final user = FirebaseAuth.instance.currentUser;
   final firebasefirestore = FirebaseFirestore.instance;
+
   @override
   Future<Either<String, String>> postmessage(PostModel postModel) async {
     try {
