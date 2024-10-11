@@ -310,12 +310,6 @@ class _SignupScreenState extends State<SignupScreen> {
                         button: Button.Google,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SignInButton(
-                        button: Button.FacebookNew,
-                      ),
-                    ),
                   ],
                 ),
 
@@ -337,7 +331,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       child: Text(
                         'Sign In',
                         style: GoogleFonts.caveat(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

@@ -67,6 +67,7 @@ class _AddPostState extends State<AddPost> {
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.secondary,
                       border: Border.all(width: 1),
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
                     ),
@@ -184,23 +185,12 @@ class _AddPostState extends State<AddPost> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 40,
                   ),
-                  ListTile(
-                      title: Text(
-                        'Select color below to change this color',
-                        style: GoogleFonts.caveat(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      trailing: ColorIndicator(
-                        width: 44,
-                        height: 44,
-                        borderRadius: 22,
-                        color: screenPickerColor,
-                      )),
-                  SizedBox(
+                  Container(
                     width: double.infinity,
                     child: Padding(
                       padding: const EdgeInsets.all(6),
                       child: Card(
+                        color: Theme.of(context).colorScheme.secondary,
                         elevation: 2,
                         child: ColorPicker(
                           color: screenPickerColor,

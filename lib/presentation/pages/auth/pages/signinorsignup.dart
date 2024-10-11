@@ -77,6 +77,7 @@ class _SigninorsignupState extends State<Signinorsignup>
                         style: GoogleFonts.pacifico(
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                       const SizedBox(height: 20),

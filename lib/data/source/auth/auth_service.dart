@@ -7,6 +7,7 @@ import 'package:wish_i_sent/data/model/auth/signup_model.dart';
 abstract class AuthFirebaseService {
   Future<Either<String, String>> signin(SigninModel signinModel);
   Future<Either<String, String>> signup(SignupModel signupModel);
+  Future<Either<String, DocumentSnapshot<Map<String, dynamic>>>> getUser();
 }
 
 class AuthFirebaseServiceImpl extends AuthFirebaseService {
@@ -57,6 +58,23 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
       }
 
       return Left(message);
+    }
+  }
+
+  @override
+  Future<Either<String, DocumentSnapshot<Map<String, dynamic>>>>
+      getUser() async {
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+
+    try {
+      final result = await FirebaseFirestore.instance
+          .collection('User')
+          .doc(userId.toString())
+          .get();
+
+      return Right(result);
+    } catch (e) {
+      return Left('Some error occured');
     }
   }
 }

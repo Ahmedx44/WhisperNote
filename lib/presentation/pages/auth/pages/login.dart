@@ -227,12 +227,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           button: Button.Google,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SignInButton(
-                          button: Button.FacebookNew,
-                        ),
-                      ),
                     ],
                   ),
 
@@ -255,7 +249,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           'Sign Up',
                           style: GoogleFonts.caveat(
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.primary,
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),

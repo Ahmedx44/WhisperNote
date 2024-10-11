@@ -55,6 +55,8 @@ dependencies:
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6
   page_flip_builder: ^0.1.4
+  dropdown_button2: ^2.3.9
+  xor_encryption: ^0.0.5
  
  
 

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:wish_i_sent/data/model/auth/signin_model.dart';
 import 'package:wish_i_sent/data/model/auth/signup_model.dart';
@@ -14,5 +15,11 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<String, String>> signup(SignupModel signupModel) async {
     return await sl<AuthFirebaseService>().signup(signupModel);
+  }
+
+  @override
+  Future<Either<String, DocumentSnapshot<Map<String, dynamic>>>>
+      getUser() async {
+    return await sl<AuthFirebaseService>().getUser();
   }
 }

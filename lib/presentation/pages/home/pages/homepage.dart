@@ -9,6 +9,13 @@ import 'package:wish_i_sent/presentation/pages/home/bloc/post_bloc/post_cubit.da
 import 'package:wish_i_sent/presentation/pages/home/bloc/post_bloc/post_state.dart';
 import 'package:wish_i_sent/service_provider.dart';
 
+enum Category {
+  Lover,
+  Friend,
+  Parent,
+  Relative,
+}
+
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
@@ -19,6 +26,8 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   final Map<int, String> enteredKeys = {};
   final Map<int, bool> canFlip = {};
+  String? _searchQuery;
+  Category? selectedValue;
 
   Color parseColor(String colorString) {
     final hexColor = colorString.replaceAll("Color(", "").replaceAll(")", "");
@@ -46,6 +55,24 @@ class _HomepageState extends State<Homepage> {
                   );
                 }
 
+                List<Map<String, dynamic>> filteredPosts = querySnapshot.docs
+                    .map((doc) => doc.data())
+                    .where((postData) {
+                  if (_searchQuery != null &&
+                      _searchQuery!.isNotEmpty &&
+                      !postData['name']
+                          .toString()
+                          .toLowerCase()
+                          .contains(_searchQuery!.toLowerCase())) {
+                    return false;
+                  }
+                  if (selectedValue != null &&
+                      selectedValue != postData['category']) {
+                    return false;
+                  }
+                  return true;
+                }).toList();
+
                 return SafeArea(
                   child: Container(
                     color: Theme.of(context).colorScheme.surface,
@@ -56,27 +83,80 @@ class _HomepageState extends State<Homepage> {
                     ),
                     child: Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 5, vertical: 20),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor:
-                                  Theme.of(context).colorScheme.secondary,
-                              labelText: 'Search name',
-                              suffixIcon: const Icon(CupertinoIcons.search),
-                              border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15))),
-                            ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor:
+                                        Theme.of(context).colorScheme.secondary,
+                                    labelText: 'Search name',
+                                    suffixIcon:
+                                        const Icon(CupertinoIcons.search),
+                                    border: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15))),
+                                  ),
+                                  onChanged: (query) {
+                                    setState(() {
+                                      _searchQuery = query;
+                                    });
+                                  },
+                                ),
+                              ),
+                              // DropdownButtonHideUnderline(
+                              //   child: DropdownButton2<Category>(
+                              //     isExpanded: true,
+                              //     hint: Text(
+                              //       'Select Item',
+                              //       style: TextStyle(
+                              //         fontSize: 14,
+                              //         color: Theme.of(context).hintColor,
+                              //       ),
+                              //     ),
+                              //     items: [
+                              //       // Add the "All" option if necessary
+                              //       const DropdownMenuItem<Category>(
+                              //         value:
+                              //             null, // Optional: you can set it to null or Category.Lover, etc.
+                              //         child: Text('All'),
+                              //       ),
+                              //       // Map through enum values to create dropdown items
+                              //       ...Category.values.map((category) {
+                              //         return DropdownMenuItem<Category>(
+                              //           value: category,
+                              //           child: Text(category.name),
+                              //         );
+                              //       }).toList(),
+                              //     ],
+                              //     value: selectedValue,
+                              //     onChanged: (Category? value) {
+                              //       setState(() {
+                              //         selectedValue = value;
+                              //       });
+                              //     },
+                              //     buttonStyleData: const ButtonStyleData(
+                              //       padding:
+                              //           EdgeInsets.symmetric(horizontal: 16),
+                              //       height: 40,
+                              //       width: 140,
+                              //     ),
+                              //     menuItemStyleData: const MenuItemStyleData(
+                              //       height: 40,
+                              //     ),
+                              //   ),
+                              // ),
+                            ],
                           ),
                         ),
                         Expanded(
                           child: ListView.builder(
-                            itemCount: querySnapshot.docs.length,
+                            itemCount: filteredPosts.length,
                             itemBuilder: (context, index) {
-                              final postData = querySnapshot.docs[index].data();
+                              final postData = filteredPosts[index];
 
                               // Ensure 'key' is present in postData
                               if (postData['key'] != null &&
@@ -450,8 +530,9 @@ class _HomepageState extends State<Homepage> {
               },
             );
           }
-
-          return const Center(child: Text('No data'));
+          return const Center(
+            child: Text('An error occurred'),
+          );
         },
       ),
     );
