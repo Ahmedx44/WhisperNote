@@ -8,14 +8,12 @@ import 'package:wish_i_sent/domain/usecase/auth/get_user.dart';
 import 'package:wish_i_sent/presentation/pages/Profile/bloc/profile_cubit.dart';
 import 'package:wish_i_sent/presentation/pages/Profile/bloc/profile_state.dart';
 import 'package:wish_i_sent/service_provider.dart';
-import 'package:xor_encryption/xor_encryption.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final String key = XorCipher().getSecretKey(20);
     print(key);
     return BlocProvider(
       create: (context) => ProfileCubit(sl<GetUserUseCase>())..getUserProfile(),

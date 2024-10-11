@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wish_i_sent/data/model/post/post_model.dart';
-import 'package:xor_encryption/xor_encryption.dart';
 
 abstract class PostService {
   Future<Either<String, String>> postmessage(PostModel postModel);
@@ -14,7 +13,6 @@ class PostServiceImpl extends PostService {
   final firebasefirestore = FirebaseFirestore.instance;
   @override
   Future<Either<String, String>> postmessage(PostModel postModel) async {
-    final String key = XorCipher().getSecretKey(20);
     try {
       await firebasefirestore
           .collection('messages')
