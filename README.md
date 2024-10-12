@@ -1,4 +1,6 @@
-![Screenshot_1728747624](https://github.com/user-attachments/assets/22e08444-ce63-4239-a44f-d1e3650a0497)
+Here’s your **GitHub README** aligned and formatted correctly:
+
+---
 
 # **WhisperNotes**
 
@@ -14,14 +16,15 @@ Welcome to **WhisperNotes**, a simple and intuitive app that allows users to sen
 - **Message Locking with Key**: Lock messages with a unique key, allowing only users with the key to unlock and read them.
 - **Search and Explore**: Search for messages by recipient name or browse messages based on categories like Friend, Family, or Lover.
 
-
 ## **Screenshots**
-![Screenshot_1728747621](https://github.com/user-attachments/assets/26800f1f-de3f-4db3-ba5a-2a47b5c96f7d)![Uploadin![Screenshot_1728747630](https://github.com/user-attachments/assets/3816a4d8-6e78-493c-ac48-4a48a69daa9f)g Screenshot_1728747624.png…]()
-![Screenshot_1728747797](https://github.com/user-attachments/assets/18212e14-3776-4fad-8978-ac062b3484de)![Screenshot_1728747805](https://github.com/user-attachments/assets/fefc48c7-6834-43ba-800b-5d51f33ef176)![Screenshot_1728747811](https://github.com/user-attachments/assets/c393669a-56f9-4903-8143-4563c99f4099)
 
-
-![Screenshot_1728747644](https://github.com/user-attachments/assets/499ad0e7-c610-496a-9d0f-96faa114b4c6)
-
+![Screenshot 1](https://github.com/user-attachments/assets/22e08444-ce63-4239-a44f-d1e3650a0497)
+![Screenshot 2](https://github.com/user-attachments/assets/26800f1f-de3f-4db3-ba5a-2a47b5c96f7d)
+![Screenshot 3](https://github.com/user-attachments/assets/3816a4d8-6e78-493c-ac48-4a48a69daa9f)
+![Screenshot 4](https://github.com/user-attachments/assets/18212e14-3776-4fad-8978-ac062b3484de)
+![Screenshot 5](https://github.com/user-attachments/assets/fefc48c7-6834-43ba-800b-5d51f33ef176)
+![Screenshot 6](https://github.com/user-attachments/assets/c393669a-56f9-4903-8143-4563c99f4099)
+![Screenshot 7](https://github.com/user-attachments/assets/499ad0e7-c610-496a-9d0f-96faa114b4c6)
 
 ## **Getting Started**
 
@@ -34,7 +37,7 @@ Welcome to **WhisperNotes**, a simple and intuitive app that allows users to sen
 
 1. **Clone the repository:**
    ```bash
-  https://github.com/Ahmedx44/wish_i_sent.git
+   git clone https://github.com/Ahmedx44/wish_i_sent.git
    ```
 
 2. **Navigate to the project directory:**
@@ -64,7 +67,6 @@ Welcome to **WhisperNotes**, a simple and intuitive app that allows users to sen
 - **Lock a Message**: Secure your messages with a key for private viewing.
 - **Explore Messages**: Search for messages by recipient or browse through categories.
 
-
 ## **Contributing**
 
 Contributions are welcome! Feel free to:
@@ -73,3 +75,7 @@ Contributions are welcome! Feel free to:
 3. Commit your changes (`git commit -m 'Add feature'`).
 4. Push to the branch (`git push origin feature-branch`).
 5. Open a Pull Request.
+
+---
+
+This should now be aligned correctly, with proper formatting for your screenshots and content.
