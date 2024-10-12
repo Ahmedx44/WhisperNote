@@ -1,14 +1,15 @@
+import 'package:WhisperNote/core/asset/app_image.dart';
+import 'package:WhisperNote/data/model/auth/signup_model.dart';
+import 'package:WhisperNote/domain/usecase/auth/signin_with_google.dart';
+import 'package:WhisperNote/domain/usecase/auth/signup_usecase.dart';
+import 'package:WhisperNote/presentation/widget/custom_app_bar.dart';
+import 'package:WhisperNote/service_provider.dart';
 import 'package:custom_signin_buttons/custom_signin_buttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wish_i_sent/data/model/auth/signup_model.dart';
-import 'package:wish_i_sent/domain/usecase/auth/signin_with_google.dart';
-import 'package:wish_i_sent/domain/usecase/auth/signup_usecase.dart';
-import 'package:wish_i_sent/presentation/widget/custom_app_bar.dart';
-import 'package:wish_i_sent/service_provider.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -306,40 +307,57 @@ class _SignupScreenState extends State<SignupScreen> {
                 Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SignInButton(
-                        onPressed: () async {
-                          showDialog(
-                            context: context,
-                            builder: (context) => const Center(
-                                child: CircularProgressIndicator()),
-                          );
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          onTap: () async {
+                            showDialog(
+                              context: context,
+                              builder: (context) => const Center(
+                                  child: CircularProgressIndicator()),
+                            );
 
-                          final result =
-                              await sl<SigninWithGoogleUseCase>().call();
-                          result.fold((ifLeft) {
-                            Future.delayed(const Duration(milliseconds: 100),
-                                () {
-                              showToast(
-                                ifLeft,
-                                backgroundColor: Colors.red,
-                                context: context,
-                                animation: StyledToastAnimation.slideFromTop,
-                                reverseAnimation: StyledToastAnimation.fade,
-                                position: StyledToastPosition.top,
-                                animDuration: const Duration(seconds: 1),
-                                duration: const Duration(seconds: 4),
-                                curve: Curves.elasticOut,
-                                reverseCurve: Curves.linear,
-                              );
+                            final result =
+                                await sl<SigninWithGoogleUseCase>().call();
+                            result.fold((ifLeft) {
+                              Future.delayed(const Duration(milliseconds: 100),
+                                  () {
+                                showToast(
+                                  ifLeft,
+                                  backgroundColor: Colors.red,
+                                  context: context,
+                                  animation: StyledToastAnimation.slideFromTop,
+                                  reverseAnimation: StyledToastAnimation.fade,
+                                  position: StyledToastPosition.top,
+                                  animDuration: const Duration(seconds: 1),
+                                  duration: const Duration(seconds: 4),
+                                  curve: Curves.elasticOut,
+                                  reverseCurve: Curves.linear,
+                                );
+                              });
+                            }, (ifRight) {
+                              context.go('/home');
                             });
-                          }, (ifRight) {
-                            context.go('/home');
-                          });
-                        },
-                        button: Button.Google,
-                      ),
-                    ),
+                          },
+                          child: Container(
+                            width: 300,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.white,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Image.asset(height: 30, AppImage.google),
+                                Text(
+                                  'Signin with google',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 20),
+                                )
+                              ],
+                            ),
+                          ),
+                        )),
                   ],
                 ),
 
@@ -352,7 +370,10 @@ class _SignupScreenState extends State<SignupScreen> {
                   children: [
                     Text(
                       'Already have Account? ',
-                      style: GoogleFonts.caveat(color: Colors.white),
+                      style: GoogleFonts.caveat(
+                        color: Colors.white,
+                        fontSize: 22,
+                      ),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -363,6 +384,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         style: GoogleFonts.caveat(
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.bold,
+                          fontSize: 22,
                         ),
                       ),
                     ),

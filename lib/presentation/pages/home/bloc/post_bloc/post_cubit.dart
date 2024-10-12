@@ -1,6 +1,6 @@
+import 'package:WhisperNote/domain/usecase/post/get_post_usecase.dart';
+import 'package:WhisperNote/presentation/pages/home/bloc/post_bloc/post_state.dart';
 import 'package:bloc/bloc.dart';
-import 'package:wish_i_sent/domain/usecase/post/get_post_usecase.dart';
-import 'package:wish_i_sent/presentation/pages/home/bloc/post_bloc/post_state.dart';
 
 class PostCubit extends Cubit<PostState> {
   final GetPostUsecase getPostUsecase;

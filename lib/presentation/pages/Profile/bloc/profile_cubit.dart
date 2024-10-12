@@ -1,6 +1,6 @@
+import 'package:WhisperNote/domain/usecase/auth/get_user.dart';
+import 'package:WhisperNote/presentation/pages/Profile/bloc/profile_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wish_i_sent/domain/usecase/auth/get_user.dart';
-import 'package:wish_i_sent/presentation/pages/Profile/bloc/profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   final GetUserUseCase getUserUseCase;

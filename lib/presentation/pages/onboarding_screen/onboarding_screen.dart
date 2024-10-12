@@ -1,9 +1,9 @@
+import 'package:WhisperNote/core/asset/app_vector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:onboarding_intro_screen/onboarding_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wish_i_sent/core/asset/app_vector.dart';
 
 class OnboardingScreenn extends StatefulWidget {
   const OnboardingScreenn({super.key});
@@ -35,7 +35,7 @@ class _OnboardingScreenState extends State<OnboardingScreenn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         body: OnBoardingScreen(
           animationDuration: const Duration(microseconds: 500),
           onSkip: () {

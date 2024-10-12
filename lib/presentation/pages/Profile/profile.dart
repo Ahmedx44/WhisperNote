@@ -1,13 +1,12 @@
+import 'package:WhisperNote/domain/usecase/auth/get_user.dart';
+import 'package:WhisperNote/presentation/pages/Profile/bloc/profile_cubit.dart';
+import 'package:WhisperNote/presentation/pages/Profile/bloc/profile_state.dart';
+import 'package:WhisperNote/service_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wish_i_sent/domain/usecase/auth/get_user.dart';
-import 'package:wish_i_sent/presentation/pages/Profile/bloc/profile_cubit.dart';
-import 'package:wish_i_sent/presentation/pages/Profile/bloc/profile_state.dart';
-import 'package:wish_i_sent/service_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

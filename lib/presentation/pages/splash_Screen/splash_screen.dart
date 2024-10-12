@@ -1,7 +1,7 @@
+import 'package:WhisperNote/core/asset/app_vector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:wish_i_sent/core/asset/app_vector.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

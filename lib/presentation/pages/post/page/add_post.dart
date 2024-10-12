@@ -1,3 +1,7 @@
+import 'package:WhisperNote/data/model/post/post_model.dart';
+import 'package:WhisperNote/domain/usecase/post/post_usecase.dart';
+import 'package:WhisperNote/presentation/widget/custom_app_bar.dart';
+import 'package:WhisperNote/service_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fk_toggle/fk_toggle.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
@@ -5,10 +9,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wish_i_sent/data/model/post/post_model.dart';
-import 'package:wish_i_sent/domain/usecase/post/post_usecase.dart';
-import 'package:wish_i_sent/presentation/widget/custom_app_bar.dart';
-import 'package:wish_i_sent/service_provider.dart';
 
 class AddPost extends StatefulWidget {
   const AddPost({super.key});
@@ -247,9 +247,10 @@ class _AddPostState extends State<AddPost> {
                           builder: (context) =>
                               const Center(child: CircularProgressIndicator()),
                         );
+
                         final result = await sl<PostUsecase>().call(PostModel(
                           userId: userId,
-                          color: screenPickerColor.toString(),
+                          color: screenPickerColor.value.toRadixString(16),
                           name: _nameController.text,
                           category: categoryName,
                           message: _messageController.text,
@@ -261,21 +262,18 @@ class _AddPostState extends State<AddPost> {
                         result.fold(
                           (ifLeft) {
                             Navigator.pop(context);
-                            Future.delayed(const Duration(milliseconds: 100),
-                                () {
-                              showToast(
-                                ifLeft,
-                                backgroundColor: Colors.red,
-                                context: context,
-                                animation: StyledToastAnimation.slideFromTop,
-                                reverseAnimation: StyledToastAnimation.fade,
-                                position: StyledToastPosition.top,
-                                animDuration: const Duration(seconds: 1),
-                                duration: const Duration(seconds: 4),
-                                curve: Curves.elasticOut,
-                                reverseCurve: Curves.linear,
-                              );
-                            });
+                            showToast(
+                              ifLeft,
+                              backgroundColor: Colors.green,
+                              context: context,
+                              animation: StyledToastAnimation.slideFromTop,
+                              reverseAnimation: StyledToastAnimation.fade,
+                              position: StyledToastPosition.top,
+                              animDuration: const Duration(seconds: 1),
+                              duration: const Duration(seconds: 4),
+                              curve: Curves.elasticOut,
+                              reverseCurve: Curves.linear,
+                            );
                           },
                           (ifRight) {
                             Navigator.pop(context);
@@ -301,25 +299,23 @@ class _AddPostState extends State<AddPost> {
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           color: Theme.of(context).colorScheme.primary,
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Text(
-                            'Post',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 22),
+                            'Submit',
+                            style: GoogleFonts.caveat(
+                                fontSize: 24, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 30,
+                    height: MediaQuery.of(context).size.height / 50,
                   ),
                 ],
               ),
             ),
-          ),
+          )
         ],
       ),
     );

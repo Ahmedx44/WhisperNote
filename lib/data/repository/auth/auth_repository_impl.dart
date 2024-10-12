@@ -1,10 +1,10 @@
+import 'package:WhisperNote/data/model/auth/signin_model.dart';
+import 'package:WhisperNote/data/model/auth/signup_model.dart';
+import 'package:WhisperNote/data/source/auth/auth_service.dart';
+import 'package:WhisperNote/domain/repository/auth/auth_repository.dart';
+import 'package:WhisperNote/service_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:wish_i_sent/data/model/auth/signin_model.dart';
-import 'package:wish_i_sent/data/model/auth/signup_model.dart';
-import 'package:wish_i_sent/data/source/auth/auth_service.dart';
-import 'package:wish_i_sent/domain/repository/auth/auth_repository.dart';
-import 'package:wish_i_sent/service_provider.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
   @override
@@ -22,9 +22,9 @@ class AuthRepositoryImpl extends AuthRepository {
       getUser() async {
     return await sl<AuthFirebaseService>().getUser();
   }
-  
+
   @override
-  Future<Either<String, String>> signinWithApple()async{
+  Future<Either<String, String>> signinWithApple() async {
     return await sl<AuthFirebaseService>().signinWithGoogle();
   }
 }

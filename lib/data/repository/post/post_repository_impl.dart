@@ -1,9 +1,9 @@
+import 'package:WhisperNote/data/model/post/post_model.dart';
+import 'package:WhisperNote/data/source/post/post_service.dart';
+import 'package:WhisperNote/domain/repository/post/post_repository.dart';
+import 'package:WhisperNote/service_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:wish_i_sent/data/model/post/post_model.dart';
-import 'package:wish_i_sent/data/source/post/post_service.dart';
-import 'package:wish_i_sent/domain/repository/post/post_repository.dart';
-import 'package:wish_i_sent/service_provider.dart';
 
 class PostRepositoryImpl extends PostRepository {
   @override

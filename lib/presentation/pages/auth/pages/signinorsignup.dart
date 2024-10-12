@@ -1,8 +1,8 @@
+import 'package:WhisperNote/core/asset/app_vector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wish_i_sent/core/asset/app_vector.dart';
 
 class Signinorsignup extends StatefulWidget {
   const Signinorsignup({super.key});
@@ -73,7 +73,7 @@ class _SigninorsignupState extends State<Signinorsignup>
                       ),
                       const SizedBox(height: 20),
                       Text(
-                        'UnSpoken',
+                        'WhisperNote',
                         style: GoogleFonts.pacifico(
                           fontWeight: FontWeight.bold,
                           fontSize: 30,

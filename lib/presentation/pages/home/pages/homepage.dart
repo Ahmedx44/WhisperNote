@@ -1,13 +1,13 @@
+import 'package:WhisperNote/domain/usecase/post/get_post_usecase.dart';
+import 'package:WhisperNote/presentation/pages/home/bloc/post_bloc/post_cubit.dart';
+import 'package:WhisperNote/presentation/pages/home/bloc/post_bloc/post_state.dart';
+import 'package:WhisperNote/service_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
-import 'package:wish_i_sent/domain/usecase/post/get_post_usecase.dart';
-import 'package:wish_i_sent/presentation/pages/home/bloc/post_bloc/post_cubit.dart';
-import 'package:wish_i_sent/presentation/pages/home/bloc/post_bloc/post_state.dart';
-import 'package:wish_i_sent/service_provider.dart';
 
 enum Category {
   Lover,
@@ -30,8 +30,7 @@ class _HomepageState extends State<Homepage> {
   Category? selectedValue;
 
   Color parseColor(String colorString) {
-    final hexColor = colorString.replaceAll("Color(", "").replaceAll(")", "");
-    return Color(int.parse(hexColor));
+    return Color(int.parse(colorString, radix: 16));
   }
 
   @override
@@ -455,10 +454,15 @@ class _HomepageState extends State<Homepage> {
                                         children: [
                                           const Icon(
                                               CupertinoIcons.text_aligncenter),
-                                          Text(
-                                            'To ${postData['category']}',
-                                            style: GoogleFonts.caveat(
-                                                fontSize: 25),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'To ${postData['category']}',
+                                                style: GoogleFonts.caveat(
+                                                    fontSize: 25),
+                                              ),
+                                              Text(postData['name'])
+                                            ],
                                           ),
                                           SizedBox(
                                             width: MediaQuery.of(context)
