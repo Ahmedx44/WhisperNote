@@ -32,7 +32,7 @@ Welcome to **WhisperNotes**, a simple and intuitive app that allows users to sen
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
+  https://github.com/Ahmedx44/wish_i_sent.git
    ```
 
 2. **Navigate to the project directory:**
@@ -61,7 +61,7 @@ Welcome to **WhisperNotes**, a simple and intuitive app that allows users to sen
 - **Post a Message**: Write and customize messages, then post them anonymously.
 - **Lock a Message**: Secure your messages with a key for private viewing.
 - **Explore Messages**: Search for messages by recipient or browse through categories.
-- **Like Messages**: Show support by liking posts.
+
 
 ## **Contributing**
 
@@ -71,11 +71,3 @@ Contributions are welcome! Feel free to:
 3. Commit your changes (`git commit -m 'Add feature'`).
 4. Push to the branch (`git push origin feature-branch`).
 5. Open a Pull Request.
-
-## **License**
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-This README should provide clear instructions for anyone looking to use or contribute to the app. You can replace the placeholders with actual names and links specific to your project.
