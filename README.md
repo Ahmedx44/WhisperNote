@@ -17,14 +17,14 @@ Welcome to **WhisperNotes**, a simple and intuitive app that allows users to sen
 - **Search and Explore**: Search for messages by recipient name or browse messages based on categories like Friend, Family, or Lover.
 
 ## **Screenshots**
+<img src="https://github.com/user-attachments/assets/22e08444-ce63-4239-a44f-d1e3650a0497" width="200" />
+<img src="https://github.com/user-attachments/assets/26800f1f-de3f-4db3-ba5a-2a47b5c96f7d" width="200" />
+<img src="https://github.com/user-attachments/assets/3816a4d8-6e78-493c-ac48-4a48a69daa9f" width="200" />
+<img src="https://github.com/user-attachments/assets/18212e14-3776-4fad-8978-ac062b3484de" width="200" />
+<img src="https://github.com/user-attachments/assets/fefc48c7-6834-43ba-800b-5d51f33ef176" width="200" />
+<img src="https://github.com/user-attachments/assets/c393669a-56f9-4903-8143-4563c99f4099" width="200" />
+<img src="https://github.com/user-attachments/assets/499ad0e7-c610-496a-9d0f-96faa114b4c6" width="200" />
 
-![Screenshot 1](https://github.com/user-attachments/assets/22e08444-ce63-4239-a44f-d1e3650a0497)
-![Screenshot 2](https://github.com/user-attachments/assets/26800f1f-de3f-4db3-ba5a-2a47b5c96f7d)
-![Screenshot 3](https://github.com/user-attachments/assets/3816a4d8-6e78-493c-ac48-4a48a69daa9f)
-![Screenshot 4](https://github.com/user-attachments/assets/18212e14-3776-4fad-8978-ac062b3484de)
-![Screenshot 5](https://github.com/user-attachments/assets/fefc48c7-6834-43ba-800b-5d51f33ef176)
-![Screenshot 6](https://github.com/user-attachments/assets/c393669a-56f9-4903-8143-4563c99f4099)
-![Screenshot 7](https://github.com/user-attachments/assets/499ad0e7-c610-496a-9d0f-96faa114b4c6)
 
 ## **Getting Started**
 
@@ -76,6 +76,4 @@ Contributions are welcome! Feel free to:
 4. Push to the branch (`git push origin feature-branch`).
 5. Open a Pull Request.
 
----
 
-This should now be aligned correctly, with proper formatting for your screenshots and content.
