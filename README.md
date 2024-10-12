@@ -2,7 +2,7 @@
 
 ### **Anonymous Messaging App with Customization and Secure Key Unlocking 🔒**
 
-Welcome to **WhisperNotes**, a simple and intuitive app that allows users to send anonymous messages to loved ones, friends, and family. Customize your messages and secure them with a unique key for private viewing. 🔑
+Welcome to WhisperNotes, the place where users can send the messages they wish they had sent but couldn’t. Express your thoughts, feelings, and words anonymously to loved ones, friends, or family—without revealing your identity. Customize your messages and secure them with a unique key for private viewing. 🔑
 
 ## **Features** ✨
 
