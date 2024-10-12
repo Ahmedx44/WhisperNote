@@ -23,7 +23,9 @@ Welcome to **WhisperNotes**, a simple and intuitive app that allows users to sen
 <img src="https://github.com/user-attachments/assets/499ad0e7-c610-496a-9d0f-96faa114b4c6" width="200" style="margin: 10px;" />
 <img src="https://github.com/user-attachments/assets/fefc48c7-6834-43ba-800b-5d51f33ef176" width="200" style="margin: 10px;" />
 <img src="https://github.com/user-attachments/assets/c393669a-56f9-4903-8143-4563c99f4099" width="200" style="margin: 10px;" />
-<img src="https://github.com/user-attachments/assets/18212e14-3776-4fad-8978-ac062b3484de" width="200" style="margin: 10px;" />
+<img src="https://github.com/user-attachments/assets/7aaeae4d-e96f-439e-86cf-67b3f3a4b127" width="200" style="margin: 10px;" />
+
+
 
 
 
