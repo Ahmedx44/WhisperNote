@@ -268,20 +268,13 @@ class _HomepageState extends State<Homepage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'To: ${postData['category']}',
+                                                  'To: ${postData['category']} ${postData['name']}',
                                                   style: GoogleFonts.caveat(
                                                     fontSize: 30,
                                                     color: Colors.white,
                                                   ),
                                                 ),
                                                 const SizedBox(height: 10),
-                                                Text(
-                                                  'Category: ${postData['category']}',
-                                                  style: GoogleFonts.caveat(
-                                                    fontSize: 24,
-                                                    color: Colors.white70,
-                                                  ),
-                                                ),
                                                 const SizedBox(height: 20),
                                                 Text(
                                                   postData['message'],
